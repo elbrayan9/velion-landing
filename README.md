@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VELION 🦁⚡
 
-## Getting Started
+**Potencia tu negocio con Inteligencia Artificial.**
 
-First, run the development server:
+VELION es una landing page moderna y de alto rendimiento diseñada para una agencia de automatización e Inteligencia Artificial. Este proyecto destaca por su diseño visual impactante, animaciones fluidas y una experiencia de usuario premium.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tecnologías
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Este proyecto está construido con las últimas tecnologías web para garantizar velocidad, escalabilidad y mantenibilidad:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **[Next.js 15](https://nextjs.org/)** - El framework de React para producción (App Router).
+- **[React 19](https://react.dev/)** - Biblioteca para interfaces de usuario.
+- **[Tailwind CSS v4](https://tailwindcss.com/)** - Estilizado moderno y eficiente.
+- **[Framer Motion](https://www.framer.com/motion/)** - Animaciones complejas y gestos.
+- **TypeScript** - Tipado estático para un código robusto.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Características
 
-## Learn More
+- **Diseño Premium**: Estética oscura con acentos neón (Cyan/Violeta), glassmorphism y tipografía cuidada (Inter + Newsreader).
+- **Animaciones Reactivas**: Efectos de scroll, hover cards, y fondos dinámicos (Cosmic & Sonar backgrounds).
+- **Performance**: Optimización de renderizado y eliminación de cuellos de botella en animaciones (GPU acceleration).
+- **Responsive**: Totalmente adaptable a dispositivos móviles, tablets y escritorio.
+- **Componentes Modulares**: Arquitectura basada en componentes reutilizables y limpios.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Instalación y Uso
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sigue estos pasos para ejecutar el proyecto localmente:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  **Clonar el repositorio:**
 
-## Deploy on Vercel
+    ```bash
+    git clone https://github.com/elbrayan9/velion-landing.git
+    cd velion-landing
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2.  **Instalar dependencias:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    npm install
+    # o
+    yarn install
+    ```
+
+3.  **Iniciar el servidor de desarrollo:**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **Ver en el navegador:**
+    Abre [http://localhost:3000](http://localhost:3000) para ver la aplicación.
+
+## 📂 Estructura del Proyecto
+
+- `/app`: Rutas y páginas (App Router).
+- `/components`: Componentes de UI reutilizables (Hero, Marquee, BentoGrid, etc.).
+- `/public`: Activos estáticos (imágenes, iconos).
+
+---
+
+© 2025 VELION AI Agency. Todos los derechos reservados.
