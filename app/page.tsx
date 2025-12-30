@@ -40,16 +40,14 @@ import {
   Smartphone,
   ShoppingBag,
 } from "lucide-react";
-import { ThemeToggle } from "./components/ThemeToggle";
-import ConnectedNodes from "./components/ConnectedNodes";
-import SonarHero from "./components/SonarHero";
 import BentoGrid from "./components/BentoGrid";
 import InfiniteMarquee from "./components/InfiniteMarquee";
-import CosmicBackground from "./components/CosmicBackground";
 import SonarBackground from "./components/SonarBackground";
-import VelionLogo from "./components/VelionLogo";
+import AuraEngine, { AuraEngineRef } from "./components/AuraEngine";
+import NeuralBrain, { NeuralBrainRef } from "./components/NeuralBrain";
 
-// Swiper Imports Removed
+import VelionLogo from "./components/VelionLogo";
+import { AnimatedTitle } from "./components/AnimatedTitle";
 
 // --- CUSTOM ICONS ---
 
@@ -291,65 +289,65 @@ const NeonCard = ({
 
 // --- NEW COMPONENTS FOR VERSATILITY ---
 
+const INDUSTRY_TABS = [
+  {
+    id: 0,
+    label: "Inmobiliaria",
+    icon: <Building size={24} />,
+    title: "Agente de Bienes Raíces",
+    description:
+      "Automatice la calificación de inquilinos, agende visitas coordinadas con Google Calendar y envíe fichas técnicas de propiedades por WhatsApp sin intervención humana.",
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    id: 1,
+    label: "Salud",
+    icon: <Stethoscope size={24} />,
+    title: "Asistente Médico Virtual",
+    description:
+      "Confirma turnos automáticamente para reducir el ausentismo, responde dudas pre-operatorias frecuentes y gestiona la reprogramación de citas las 24hs.",
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    id: 2,
+    label: "Gastronomía",
+    icon: <Utensils size={24} />,
+    title: "Gestor de Pedidos & Delivery",
+    description:
+      "Toma pedidos complejos por WhatsApp interpretando audios, gestiona el menú del día en tiempo real y coordina la logística de delivery.",
+    color: "from-orange-500 to-red-500",
+  },
+  {
+    id: 3,
+    label: "Servicios Prof.",
+    icon: <Briefcase size={24} />,
+    title: "Secretaria Legal & Contable",
+    description:
+      "Ideal para abogados y contadores. Recibe documentación, responde consultas sobre estado de trámites y filtra clientes potenciales automáticamente.",
+    color: "from-violet-500 to-purple-500",
+  },
+  {
+    id: 4,
+    label: "Comercios",
+    icon: <ShoppingBag size={24} />,
+    title: "Asistente de Ventas Retail",
+    description:
+      "Automatice la atención en su tienda. Responda consultas de stock, precios y horarios, y gestione pedidos por WhatsApp las 24hs.",
+    color: "from-pink-500 to-rose-500",
+  },
+];
+
 const IndustryCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const tabs = [
-    {
-      id: 0,
-      label: "Inmobiliaria",
-      icon: <Building size={24} />,
-      title: "Agente de Bienes Raíces",
-      description:
-        "Automatice la calificación de inquilinos, agende visitas coordinadas con Google Calendar y envíe fichas técnicas de propiedades por WhatsApp sin intervención humana.",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      id: 1,
-      label: "Salud",
-      icon: <Stethoscope size={24} />,
-      title: "Asistente Médico Virtual",
-      description:
-        "Confirma turnos automáticamente para reducir el ausentismo, responde dudas pre-operatorias frecuentes y gestiona la reprogramación de citas las 24hs.",
-      color: "from-green-500 to-emerald-500",
-    },
-    {
-      id: 2,
-      label: "Gastronomía",
-      icon: <Utensils size={24} />,
-      title: "Gestor de Pedidos & Delivery",
-      description:
-        "Toma pedidos complejos por WhatsApp interpretando audios, gestiona el menú del día en tiempo real y coordina la logística de delivery.",
-      color: "from-orange-500 to-red-500",
-    },
-    {
-      id: 3,
-      label: "Servicios Prof.",
-      icon: <Briefcase size={24} />,
-      title: "Secretaria Legal & Contable",
-      description:
-        "Ideal para abogados y contadores. Recibe documentación, responde consultas sobre estado de trámites y filtra clientes potenciales automáticamente.",
-      color: "from-violet-500 to-purple-500",
-    },
-    {
-      id: 4,
-      label: "Comercios",
-      icon: <ShoppingBag size={24} />,
-      title: "Asistente de Ventas Retail",
-      description:
-        "Automatice la atención en su tienda. Responda consultas de stock, precios y horarios, y gestione pedidos por WhatsApp las 24hs.",
-      color: "from-pink-500 to-rose-500",
-    },
-  ];
-
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % tabs.length);
+      setActiveIndex((prev) => (prev + 1) % INDUSTRY_TABS.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [isPaused, tabs.length]);
+  }, [isPaused]);
 
   return (
     <section
@@ -367,17 +365,11 @@ const IndustryCarousel = () => {
           >
             <Layers size={14} className="text-cyan-400" /> Versatilidad Extrema
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-sans font-medium tracking-tight text-white mb-6"
-          >
-            Un cerebro,{" "}
-            <span className="text-cyan-400 font-serif italic">
-              infinitas posibilidades.
-            </span>
-          </motion.h2>
+          <AnimatedTitle
+            title="Un cerebro,"
+            highlight="infinitas posibilidades."
+            className="mb-6"
+          />
           <p className="text-neutral-400 max-w-2xl mx-auto">
             Nuestros agentes no son plantillas rígidas. Se entrenan
             específicamente para el vocabulario y procesos de su industria.
@@ -392,7 +384,7 @@ const IndustryCarousel = () => {
         >
           <div className="absolute w-full flex justify-center items-center">
             <AnimatePresence mode="popLayout">
-              {tabs.map((tab, index) => {
+              {INDUSTRY_TABS.map((tab, index) => {
                 // Calculate position relative to active index
                 // We want a flat row: Left (-1), Center (0), Right (1)
                 // We need to handle the wrap-around logic for indices
@@ -408,7 +400,11 @@ const IndustryCarousel = () => {
                   return diff;
                 };
 
-                const offset = getOffset(index, activeIndex, tabs.length);
+                const offset = getOffset(
+                  index,
+                  activeIndex,
+                  INDUSTRY_TABS.length
+                );
 
                 // Only render visible cards (center and immediate neighbors)
                 // Actually, let's render all but hide distant ones to keep it smooth
@@ -444,6 +440,7 @@ const IndustryCarousel = () => {
                       <div className="relative z-10 flex flex-col h-full">
                         <div
                           className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tab.color} flex items-center justify-center mb-6 shadow-lg`}
+                          suppressHydrationWarning
                         >
                           {React.cloneElement(
                             tab.icon as React.ReactElement<{
@@ -486,7 +483,7 @@ const IndustryCarousel = () => {
 
         {/* Indicators */}
         <div className="flex justify-center gap-2 mt-8">
-          {tabs.map((_, idx) => (
+          {INDUSTRY_TABS.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
@@ -533,17 +530,11 @@ const ComplexityTimeline = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
             Escalabilidad
           </div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-sans font-medium tracking-tight text-white mb-4"
-          >
-            De lo Simple{" "}
-            <span className="text-cyan-400 font-serif italic">
-              a lo Complejo
-            </span>
-          </motion.h2>
+          <AnimatedTitle
+            title="De lo Simple"
+            highlight="a lo Complejo"
+            className="mb-4"
+          />
           <p className="text-neutral-400">
             Escalamos la inteligencia artificial según la madurez digital de su
             negocio.
@@ -620,17 +611,11 @@ const ContactForm = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
               Contacto
             </div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-sans font-medium tracking-tight text-white mb-8"
-            >
-              Hablemos de{" "}
-              <span className="text-cyan-400 font-serif italic">
-                tu Proyecto
-              </span>
-            </motion.h2>
+            <AnimatedTitle
+              title="Hablemos de"
+              highlight="tu Proyecto"
+              className="mb-8"
+            />
             <div className="space-y-6">
               <div className="flex items-center gap-4 text-neutral-300">
                 <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-cyan-400">
@@ -729,22 +714,18 @@ const FounderSection = () => {
   return (
     <section
       id="nosotros"
-      className="py-24 bg-black relative border-t border-white/5 overflow-hidden"
+      className="py-24 bg-transparent relative border-t border-white/5 overflow-hidden"
     >
-      {/* Sonar Background Effect */}
-      <SonarBackground opacity={0.4} />
+      {/* Sonar Background Effect - Reduced opacity for subtle blend */}
+      <SonarBackground opacity={0.2} />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-sans font-medium tracking-tight text-white mb-6"
-          >
-            Conoce{" "}
-            <span className="text-cyan-400 font-serif italic">al Fundador</span>
-          </motion.h2>
+          <AnimatedTitle
+            title="Conoce"
+            highlight="al Fundador"
+            className="mb-6"
+          />
           <p className="text-neutral-400 max-w-2xl mx-auto">
             La mente detrás de la arquitectura de agentes de VELION.
           </p>
@@ -753,7 +734,7 @@ const FounderSection = () => {
         <div className="max-w-4xl mx-auto">
           <NeonCard
             // FIX: Removed overflow-hidden to allow glow
-            className="bg-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 relative"
+            className="bg-black/60 backdrop-blur-md rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 relative border border-white/10 shadow-2xl"
           >
             {/* Inner Clipper for Background Gradient */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
@@ -1081,15 +1062,11 @@ const LiveDemoSection = () => {
           >
             <Zap size={14} className="text-cyan-400" /> Potencia Real
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-sans font-medium tracking-tight text-white mb-6"
-          >
-            Nuestros Agentes{" "}
-            <span className="text-cyan-400 font-serif italic">en Acción</span>
-          </motion.h2>
+          <AnimatedTitle
+            title="Nuestros Agentes"
+            highlight="en Acción"
+            className="mb-6"
+          />
           <p className="text-neutral-400 max-w-2xl mx-auto">
             No es magia, es{" "}
             <span className="text-cyan-400 font-bold">Google Gemini</span>.
@@ -1187,6 +1164,7 @@ export default function VELION_Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isAccelerating, setIsAccelerating] = useState(false);
+  const auraEngineRef = useRef<AuraEngineRef>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1217,6 +1195,7 @@ export default function VELION_Landing() {
 
   const handleStartEngine = () => {
     setIsAccelerating(true);
+    auraEngineRef.current?.triggerBoost();
     setTimeout(() => {
       setIsAccelerating(false);
       const demoSection = document.querySelector("#demo");
@@ -1231,7 +1210,11 @@ export default function VELION_Landing() {
       className="min-h-screen bg-transparent text-foreground font-sans selection:bg-cyan-500/30 selection:text-foreground overflow-x-hidden"
       suppressHydrationWarning
     >
-      <CosmicBackground accelerate={isAccelerating} />
+      <AuraEngine
+        ref={auraEngineRef}
+        showUI={false}
+        className="fixed inset-0 z-0 pointer-events-none"
+      />
       {/* --- NAVBAR --- */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 ${
@@ -1239,7 +1222,7 @@ export default function VELION_Landing() {
         }`}
       >
         <div
-          className="flex items-center gap-8 p-1.5 rounded-full bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 shadow-2xl"
+          className="flex items-center gap-8 p-1.5 rounded-full bg-[#0a0a0a] border border-white/10 shadow-2xl"
           suppressHydrationWarning
         >
           {/* Logo */}
@@ -1332,36 +1315,40 @@ export default function VELION_Landing() {
         {/* Spotlight Effect */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-125 bg-accent/20 blur-[120px] rounded-full pointer-events-none opacity-50" />
 
-        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="text-center lg:text-left"
+            className="text-center relative z-20 max-w-4xl mx-auto flex flex-col items-center"
           >
+            {/* Text Backdrop for readability - Stronger */}
+            <div className="absolute -inset-10 bg-black/60 blur-3xl rounded-full -z-10 pointer-events-none" />
+
             <div className="flex items-center gap-2 mb-6">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
               </span>
-              <span className="text-cyan-400 text-xs font-bold tracking-widest uppercase">
+              <span className="text-cyan-400 text-xs font-bold tracking-widest uppercase bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-md border border-cyan-500/30 shadow-lg shadow-black/50">
                 SISTEMA ONLINE
               </span>
             </div>
 
             <motion.h1
               variants={fadeInUp}
-              className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1]"
+              className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
             >
               Potencia tu negocio con{" "}
-              <span className="text-cyan-400 text-glow font-serif italic">
+              <span className="text-cyan-400 text-glow font-serif italic relative inline-block">
+                <span className="absolute inset-0 blur-sm bg-black/50 -z-10 rounded-lg transform scale-110"></span>
                 Inteligencia Artificial
               </span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg text-white/70 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0 font-light"
+              className="text-lg text-white/90 leading-relaxed mb-10 max-w-xl mx-auto font-light drop-shadow-md bg-black/20 backdrop-blur-sm p-4 rounded-xl border border-white/5"
             >
               Automatización de flujos con n8n y Agentes Gemini que trabajan
               mientras duermes.
@@ -1369,17 +1356,17 @@ export default function VELION_Landing() {
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-              <Button variant="shiny" href="#contacto" className="shiny-cta">
+              <Button
+                variant="shiny"
+                href="#contacto"
+                className="shiny-cta shadow-2xl shadow-cyan-500/20"
+              >
                 Auditar mi Negocio
               </Button>
             </motion.div>
           </motion.div>
-
-          <div className="relative w-full h-125 lg:h-150">
-            <SonarHero />
-          </div>
         </div>
       </section>
 
@@ -1402,15 +1389,11 @@ export default function VELION_Landing() {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-2xl sm:text-3xl md:text-5xl font-sans font-medium tracking-tight text-foreground mb-6"
-            >
-              Planes{" "}
-              <span className="text-cyan-400 font-serif italic">Flexibles</span>
-            </motion.h2>
+            <AnimatedTitle
+              title="Planes"
+              highlight="Flexibles"
+              className="mb-6"
+            />
             <p className="text-neutral-400">
               Precios en ARS (Pesos Argentinos). Sin IVA.
             </p>

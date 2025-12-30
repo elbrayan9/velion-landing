@@ -43,7 +43,7 @@ const BentoCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className={`spotlight-card group relative flex flex-col p-8 rounded-3xl border border-white/10 bg-white/2 overflow-hidden transition-all duration-500 ${className}`}
+      className={`spotlight-card group relative flex flex-col p-8 rounded-3xl border border-white/10 bg-black/60 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-500/10 ${className}`}
     >
       {/* Spotlight Background */}
       <div

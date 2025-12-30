@@ -22,9 +22,49 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "VELION",
+  title: {
+    default: "VELION",
+    template: "%s | VELION",
+  },
   description:
-    "Agentes de IA que aprenden tu negocio. Automatización para Pymes, Salud, Gastronomía y más.",
+    "Automatiza tu empresa con Agentes de Inteligencia Artificial. VELION crea sistemas autónomos que gestionan ventas, turnos y procesos mientras duermes.",
+  keywords: [
+    "IA para empresas",
+    "Agentes AI",
+    "Automatización de negocios",
+    "Chatbots inteligentes",
+    "Gemini AI",
+    "Software Argentina",
+    "Transformación digital",
+  ],
+  authors: [{ name: "Brian Oviedo", url: "https://velion.ai" }],
+  creator: "Brian Oviedo",
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    url: "https://velion.ai",
+    title: "VELION",
+    description:
+      "Sistemas autónomos que trabajan por ti. Descubre el poder de los Agentes IA de VELION.",
+    siteName: "VELION AI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VELION | Agentes de IA",
+    description: "Automatización inteligente para tu negocio.",
+    creator: "@velion_ai",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 import { Providers } from "./providers";

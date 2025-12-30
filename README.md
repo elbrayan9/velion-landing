@@ -17,8 +17,9 @@ Este proyecto está construido con las últimas tecnologías web para garantizar
 ## ✨ Características
 
 - **Diseño Premium**: Estética oscura con acentos neón (Cyan/Violeta), glassmorphism y tipografía cuidada (Inter + Newsreader).
-- **Animaciones Reactivas**: Efectos de scroll, hover cards, y fondos dinámicos (Cosmic & Sonar backgrounds).
+- **Animaciones Reactivas**: Efectos de scroll con `AnimatedTitle`, hover cards, y fondos dinámicos (Aura Engine).
 - **Performance**: Optimización de renderizado y eliminación de cuellos de botella en animaciones (GPU acceleration).
+- **SEO Optimizado**: Metadatos completos, OpenGraph y estructura semántica para mejor indexación.
 - **Responsive**: Totalmente adaptable a dispositivos móviles, tablets y escritorio.
 - **Componentes Modulares**: Arquitectura basada en componentes reutilizables y limpios.
 
