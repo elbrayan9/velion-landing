@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { MessageSquare, Share2, ShieldCheck, ArrowRight } from "lucide-react";
 
+import { AnimatedTitle } from "./AnimatedTitle";
+
 const BentoCard = ({
   title,
   description,
@@ -89,13 +91,12 @@ export default function BentoGrid() {
     <section className="py-24 relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-sans font-medium tracking-tight text-white mb-6">
-            Soluciones de{" "}
-            <span className="text-cyan-400 font-serif italic">
-              Alto Impacto
-            </span>
-          </h2>
-          <p className="text-white/60 max-w-2xl mx-auto font-light text-lg">
+          <AnimatedTitle
+            title="Soluciones de"
+            highlight="Alto Impacto"
+            className="mb-6"
+          />
+          <p className="text-white/80 max-w-2xl mx-auto font-light text-lg bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/5 inline-block">
             Infraestructura de automatización diseñada para escalar operaciones
             sin aumentar costos fijos.
           </p>

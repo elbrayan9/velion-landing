@@ -726,7 +726,7 @@ const FounderSection = () => {
             highlight="al Fundador"
             className="mb-6"
           />
-          <p className="text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-white/80 max-w-2xl mx-auto font-light text-lg bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/5 inline-block">
             La mente detrás de la arquitectura de agentes de VELION.
           </p>
         </div>
@@ -1336,13 +1336,25 @@ export default function VELION_Landing() {
             </div>
 
             <motion.h1
-              variants={fadeInUp}
+              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
               className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
             >
               Potencia tu negocio con{" "}
               <span className="text-cyan-400 text-glow font-serif italic relative inline-block">
                 <span className="absolute inset-0 blur-sm bg-black/50 -z-10 rounded-lg transform scale-110"></span>
                 Inteligencia Artificial
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.5,
+                    ease: "circOut",
+                  }}
+                  className="absolute bottom-1 left-0 w-full h-0.5 bg-cyan-500/30 origin-left rounded-full"
+                />
               </span>
             </motion.h1>
 
