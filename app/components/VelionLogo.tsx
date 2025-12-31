@@ -11,6 +11,7 @@ const VelionLogo = ({
 }) => (
   <div
     className={`flex items-center gap-2 font-bold text-xl text-white ${className}`}
+    suppressHydrationWarning={true}
   >
     <div className="relative flex items-center justify-center">
       <Cpu

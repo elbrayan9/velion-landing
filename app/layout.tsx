@@ -22,48 +22,32 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "VELION",
-    template: "%s | VELION",
-  },
+  title: "VELION | Agencia de Automatización con IA",
   description:
-    "Automatiza tu empresa con Agentes de Inteligencia Artificial. VELION crea sistemas autónomos que gestionan ventas, turnos y procesos mientras duermes.",
+    "Pon tu negocio en piloto automático. Chatbots de WhatsApp, Agendamiento y Sistemas de Gestión Inteligentes para PyMEs.",
   keywords: [
-    "IA para empresas",
-    "Agentes AI",
-    "Automatización de negocios",
-    "Chatbots inteligentes",
-    "Gemini AI",
-    "Software Argentina",
-    "Transformación digital",
+    "automatización",
+    "IA",
+    "chatbot",
+    "whatsapp business",
+    "agencia de inteligencia artificial",
+    "n8n",
+    "pymes argentina",
   ],
-  authors: [{ name: "Brian Oviedo", url: "https://velion.ai" }],
-  creator: "Brian Oviedo",
   openGraph: {
-    type: "website",
-    locale: "es_AR",
-    url: "https://velion.ai",
-    title: "VELION",
+    title: "VELION | Agencia de Automatización con IA",
     description:
-      "Sistemas autónomos que trabajan por ti. Descubre el poder de los Agentes IA de VELION.",
-    siteName: "VELION AI",
+      "Pon tu negocio en piloto automático. Chatbots de WhatsApp, Agendamiento y Sistemas de Gestión Inteligentes para PyMEs.",
+    url: "https://velion-landing.vercel.app",
+    siteName: "VELION AI Agency",
+    locale: "es_AR",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "VELION | Agentes de IA",
-    description: "Automatización inteligente para tu negocio.",
-    creator: "@velion_ai",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    title: "VELION | Agencia de Automatización con IA",
+    description:
+      "Pon tu negocio en piloto automático. Chatbots de WhatsApp, Agendamiento y Sistemas de Gestión Inteligentes para PyMEs.",
   },
 };
 

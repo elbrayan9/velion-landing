@@ -30,6 +30,7 @@ import {
   Linkedin,
   Quote,
   Building,
+  Building2,
   Stethoscope,
   Utensils,
   Briefcase,
@@ -292,46 +293,46 @@ const INDUSTRY_TABS = [
   {
     id: 0,
     label: "Inmobiliaria",
-    icon: <Building size={24} />,
-    title: "Agente de Bienes Raíces",
+    icon: <Building2 size={24} />,
+    title: "Gestión Inmobiliaria Total",
     description:
-      "Automatice la calificación de inquilinos, agende visitas coordinadas con Google Calendar y envíe fichas técnicas de propiedades por WhatsApp sin intervención humana.",
-    color: "from-blue-500 to-cyan-500",
+      "Calificación de inquilinos, generación automática de contratos y coordinación de visitas.",
+    color: "from-cyan-500 to-blue-500",
   },
   {
     id: 1,
     label: "Salud",
     icon: <Stethoscope size={24} />,
-    title: "Asistente Médico Virtual",
+    title: "Administración Médica",
     description:
-      "Confirma turnos automáticamente para reducir el ausentismo, responde dudas pre-operatorias frecuentes y gestiona la reprogramación de citas las 24hs.",
+      "Base de datos de pacientes, confirmación de turnos y recordatorios pre-operatorios.",
     color: "from-green-500 to-emerald-500",
   },
   {
     id: 2,
     label: "Gastronomía",
     icon: <Utensils size={24} />,
-    title: "Gestor de Pedidos & Delivery",
+    title: "Logística & Delivery",
     description:
-      "Toma pedidos complejos por WhatsApp interpretando audios, gestiona el menú del día en tiempo real y coordina la logística de delivery.",
+      "Recepción de pedidos, control de comandas en cocina y aviso automático a repartidores.",
     color: "from-orange-500 to-red-500",
   },
   {
     id: 3,
     label: "Servicios Prof.",
     icon: <Briefcase size={24} />,
-    title: "Secretaria Legal & Contable",
+    title: "Despacho Legal Automático",
     description:
-      "Ideal para abogados y contadores. Recibe documentación, responde consultas sobre estado de trámites y filtra clientes potenciales automáticamente.",
+      "Análisis de documentos, filtrado de casos y redacción de borradores simples.",
     color: "from-violet-500 to-purple-500",
   },
   {
     id: 4,
     label: "Comercios",
     icon: <ShoppingBag size={24} />,
-    title: "Asistente de Ventas Retail",
+    title: "Stock & Ventas",
     description:
-      "Automatice la atención en su tienda. Responda consultas de stock, precios y horarios, y gestione pedidos por WhatsApp las 24hs.",
+      "Respuestas sobre precios, actualización de inventario y alerta de falta de stock.",
     color: "from-pink-500 to-rose-500",
   },
 ];
@@ -510,14 +511,14 @@ const ComplexityTimeline = () => {
     },
     {
       level: "Nivel 2",
-      title: "Gestión de Acciones",
-      desc: "El agente interactúa con herramientas externas. Agenda citas en Google Calendar, envía emails o genera cotizaciones PDF al instante.",
+      title: "Gestión Operativa",
+      desc: "El agente realiza tareas: Agendar en Calendar, enviar presupuestos PDF o actualizar planillas de Excel.",
       icon: <Zap size={24} className="text-violet-400" />,
     },
     {
       level: "Nivel 3",
-      title: "Integración Total",
-      desc: "Conexión profunda con tu ecosistema. Lee y escribe en tu Sistema de Gestión o Excel. Ejecuta lógica de negocio compleja.",
+      title: "Piloto Automático (Enterprise)",
+      desc: "Conexión profunda con tu ERP o Sistema de Facturación. Manejo de stock, logística y contabilidad sin intervención humana.",
       icon: <Database size={24} className="text-pink-400" />,
     },
   ];
@@ -921,15 +922,18 @@ const InteractiveChatDemo = () => {
 
 const InteractiveParserDemo = () => {
   const [input, setInput] = useState(
-    "Pago de 15000 pesos a M. Rodriguez por servicio tecnico"
+    "Registrar pago de $20.000 a Proveedor Juan por insumos de limpieza."
   );
   const [jsonResult, setJsonResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleAnalyze = async () => {
     setLoading(true);
-    const result = (await callGeminiParser(input)) as string;
-    setJsonResult(result);
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setJsonResult(
+      "✅ Gasto registrado en Sistema Contable.\n✅ Comprobante PDF generado.\n✅ Notificación enviada a Contaduría."
+    );
     setLoading(false);
   };
 
@@ -952,7 +956,7 @@ const InteractiveParserDemo = () => {
         </div>
         <div className="flex flex-col">
           <span className="text-xs text-white font-bold tracking-wide">
-            Organizador de Pedidos
+            Asistente Administrativo
           </span>
           <span className="text-[10px] text-neutral-500">
             De Caos a Formato Listo
@@ -987,9 +991,9 @@ const InteractiveParserDemo = () => {
 
         <div className="flex-1 bg-neutral-950 rounded-lg border border-white/5 p-3 overflow-hidden relative group hover:border-violet-500/20 transition-colors">
           <div className="absolute top-2 right-2 text-[10px] text-neutral-600 group-hover:text-violet-400 transition-colors font-mono font-bold">
-            JSON OUT
+            RESULTADO
           </div>
-          <pre className="text-[10px] font-mono text-green-400 overflow-auto h-full p-1 scrollbar-thin scrollbar-thumb-neutral-800">
+          <pre className="text-[10px] font-mono text-green-400 overflow-auto h-full p-1 scrollbar-thin scrollbar-thumb-neutral-800 whitespace-pre-wrap">
             {jsonResult ? jsonResult : "// El resultado aparecerá aquí..."}
           </pre>
         </div>
@@ -1093,7 +1097,7 @@ const LiveDemoSection = () => {
                   <MessageSquare size={20} />
                 </div>
                 <span className="font-serif italic tracking-tight">
-                  Agente de Ventas
+                  Captación Inteligente de Leads
                 </span>
               </div>
               <p className="text-neutral-400 text-sm leading-relaxed">
@@ -1118,7 +1122,7 @@ const LiveDemoSection = () => {
                   <Calendar size={20} />
                 </div>
                 <span className="font-serif italic tracking-tight">
-                  Agente de Turnos
+                  Sincronización de Agenda
                 </span>
               </div>
               <p className="text-neutral-400 text-sm leading-relaxed">
@@ -1144,16 +1148,76 @@ const LiveDemoSection = () => {
                   <FileSpreadsheet size={20} />
                 </div>
                 <span className="font-serif italic tracking-tight">
-                  Agente Admin
+                  Asistente Administrativo
                 </span>
               </div>
               <p className="text-neutral-400 text-sm leading-relaxed">
-                <strong>¡Escribe algo!</strong> Ingresa un pedido desordenado
-                (ej: audio o texto) y mira cómo el sistema lo organiza para
-                facturar.
+                <strong>¡Pruébalo!</strong> Simplemente dicta el gasto o la
+                tarea. La IA lo carga en tu sistema, genera los documentos y
+                avisa a tu equipo.
               </p>
             </div>
           </NeonCard>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- FAQ SECTION ---
+const FAQSection = () => {
+  const faqs = [
+    {
+      q: "¿Necesito saber de tecnología para usar esto?",
+      a: "Para nada. Nosotros configuramos todo. Tú solo recibes los reportes y ves cómo la agenda se llena sola. Es 100% llave en mano.",
+    },
+    {
+      q: "¿Hay riesgo de que bloqueen mi WhatsApp?",
+      a: "No. Utilizamos la API Oficial de Meta (WhatsApp Business API) y técnicas de 'Human-Like Timing' para garantizar la seguridad de tu línea.",
+    },
+    {
+      q: "¿Sirve para mi rubro específico?",
+      a: "Nuestros agentes se entrenan a medida. Ya sea que tengas una clínica, una ferretería o un estudio jurídico, el sistema aprende tu vocabulario y reglas.",
+    },
+    {
+      q: "¿Qué incluye el Setup Inicial?",
+      a: "Incluye el diseño de la estrategia, la programación del agente, la conexión con tus sistemas (Calendar, Excel, etc.) y las pruebas intensivas antes de salir al público.",
+    },
+  ];
+
+  return (
+    <section
+      id="faq"
+      className="py-24 bg-black relative border-t border-white/5 overflow-hidden"
+    >
+      <SonarBackground opacity={0.3} />
+      <div className="container mx-auto px-6 max-w-4xl relative z-10">
+        <div className="text-center mb-16">
+          <AnimatedTitle
+            title="Preguntas"
+            highlight="Frecuentes"
+            className="mb-6"
+          />
+          <p className="text-neutral-400">
+            Todo lo que necesitas saber para dar el siguiente paso.
+          </p>
+        </div>
+
+        <div className="grid gap-6">
+          {faqs.map((faq, i) => (
+            <NeonCard
+              key={i}
+              delay={i * 0.1}
+              className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition-all group backdrop-blur-sm"
+            >
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                {faq.q}
+              </h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                {faq.a}
+              </p>
+            </NeonCard>
+          ))}
         </div>
       </div>
     </section>
@@ -1223,10 +1287,10 @@ export default function VELION_Landing() {
               transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
               className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-xl text-shadow-sm"
             >
-              Automatiza la Atención al Cliente de tu Negocio con{" "}
+              Tu Negocio en Piloto Automático con{" "}
               <span className="text-cyan-400 text-glow font-serif italic relative inline-block">
                 <span className="absolute inset-0 blur-sm bg-black/50 -z-10 rounded-lg transform scale-110"></span>
-                IA
+                Inteligencia Artificial
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
@@ -1244,8 +1308,9 @@ export default function VELION_Landing() {
               variants={fadeInUp}
               className="text-lg text-white/90 leading-relaxed mb-10 max-w-xl mx-auto font-light drop-shadow-md bg-black/20 backdrop-blur-sm p-4 rounded-xl border border-white/5"
             >
-              Agentes inteligentes que responden consultas, agendan turnos y
-              gestionan pedidos las 24hs por WhatsApp, sin intervención humana.
+              Centralizamos y automatizamos toda tu operación: Ventas, Atención
+              al Cliente y Tareas Administrativas en un solo sistema
+              inteligente.
             </motion.p>
 
             <motion.div
@@ -1258,7 +1323,7 @@ export default function VELION_Landing() {
                 target="_blank"
                 className="shiny-cta shadow-2xl shadow-cyan-500/20"
               >
-                Automatizar mi Negocio Ahora
+                Consultar por Automatización 360°
               </Button>
             </motion.div>
           </motion.div>
@@ -1321,7 +1386,9 @@ export default function VELION_Landing() {
                   Suscripción Integral
                 </h3>
                 <div className="flex items-baseline gap-1 mt-4">
-                  <span className="text-4xl font-bold text-white">$60.000</span>
+                  <span className="text-4xl font-bold text-white">
+                    $60.000 ARS
+                  </span>
                   <span className="text-neutral-400">/mes</span>
                 </div>
                 <div className="mt-4 p-3 bg-card border border-border rounded-lg flex items-center gap-3">
@@ -1330,11 +1397,9 @@ export default function VELION_Landing() {
                   </div>
                   <div className="text-sm">
                     <span className="text-white font-semibold block">
-                      Setup Inicial: $150.000
+                      Setup Inicial: $150.000 ARS
                     </span>
-                    <span className="text-white/50 text-xs">
-                      Pago único de configuración
-                    </span>
+                    <span className="text-white/50 text-xs">(Pago Único)</span>
                   </div>
                 </div>
                 <p className="text-xs text-neutral-500 mt-2">
@@ -1344,12 +1409,10 @@ export default function VELION_Landing() {
 
               <div className="space-y-4 mb-10 flex-1 relative z-10">
                 {[
-                  "Agente de IA entrenado para tu negocio",
-                  "Atención 24/7 por WhatsApp",
-                  "Agendamiento automático de citas",
-                  "Soporte Prioritario",
-                  "Mantenimiento Incluido",
-                  "Reportes Mensuales de Rendimiento",
+                  "Agente de IA para WhatsApp",
+                  "Agendamiento en Google Calendar",
+                  "Reportes Básicos en Excel",
+                  "Soporte Técnico Prioritario",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
@@ -1375,7 +1438,7 @@ export default function VELION_Landing() {
             >
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Plan Enterprise
+                  Enterprise / A Medida
                 </h3>
                 <div className="flex flex-col mt-4">
                   <span className="text-4xl font-bold text-white">
@@ -1393,14 +1456,13 @@ export default function VELION_Landing() {
 
               <div className="space-y-4 mb-10 flex-1 border-t border-white/5 pt-8">
                 {[
-                  "Integración profunda (SAP, Salesforce, etc.)",
-                  "Múltiples líneas de WhatsApp",
-                  "Dashboard de métricas avanzado",
-                  "SLA de respuesta garantizado",
-                  "Gerente de cuenta dedicado",
+                  "Integración con ERP y Stock",
+                  "Generación de Documentos (PDFs)",
+                  "Lógica de Negocio Compleja",
+                  "Gestor de Cuenta Dedicado",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-neutral-500 shrink-0 mt-0.5" />
+                    <span className="text-lg">🚀</span>
                     <span className="text-neutral-300 text-sm">{feature}</span>
                   </div>
                 ))}
@@ -1418,6 +1480,9 @@ export default function VELION_Landing() {
           </div>
         </div>
       </section>
+
+      {/* --- FAQ SECTION --- */}
+      <FAQSection />
 
       {/* --- CONTACT FORM --- */}
       <ContactForm />

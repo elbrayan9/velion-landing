@@ -22,7 +22,7 @@ export const Navbar = () => {
     { name: "Servicios", href: "#industrias" },
     { name: "Cómo Funciona", href: "#demo" },
     { name: "Precios", href: "#precios" },
-    { name: "FAQ", href: "#nosotros" },
+    { name: "FAQ", href: "#faq" },
   ];
 
   return (
@@ -71,9 +71,7 @@ export const Navbar = () => {
               Iniciar Motor
             </button>
             <a
-              href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20agendar%20una%20reuni%C3%B3n."
-              target="_blank"
-              rel="noreferrer"
+              href="#contacto"
               className="px-5 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/30 text-cyan-400 text-xs font-bold uppercase tracking-wider hover:bg-cyan-500 hover:text-white transition-all duration-300 flex items-center gap-2"
             >
               Agendar
@@ -133,9 +131,8 @@ export const Navbar = () => {
               </button>
 
               <motion.a
-                href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20agendar%20una%20reuni%C3%B3n."
-                target="_blank"
-                rel="noreferrer"
+                href="#contacto"
+                onClick={() => setMobileMenuOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
