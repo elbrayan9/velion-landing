@@ -300,6 +300,10 @@ const AuraEngine = forwardRef<AuraEngineRef, AuraEngineProps>(
       const handleResize = () => init();
       window.addEventListener("resize", handleResize);
 
+      // Custom Event for Boost
+      const handleBoost = () => startEngineSequence();
+      window.addEventListener("velion-boost", handleBoost);
+
       // --- INIT ---
       init();
       animate();
@@ -307,6 +311,7 @@ const AuraEngine = forwardRef<AuraEngineRef, AuraEngineProps>(
       // --- CLEANUP ---
       return () => {
         window.removeEventListener("resize", handleResize);
+        window.removeEventListener("velion-boost", handleBoost);
         if (animationId) cancelAnimationFrame(animationId);
         if (ambientInterval) clearInterval(ambientInterval);
         if (engineInterval) clearInterval(engineInterval);

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import VelionLogo from "./VelionLogo";
+
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -36,9 +38,13 @@ export const Navbar = () => {
           {/* Logo */}
           <a
             href="#"
-            className="text-xl font-bold tracking-widest text-white hover:text-cyan-400 transition-colors"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="hover:opacity-80 transition-opacity"
           >
-            VELION
+            <VelionLogo iconClassName="w-6 h-6" className="text-lg" />
           </a>
 
           {/* Desktop Links */}
@@ -54,8 +60,16 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("velion-boost"))
+              }
+              className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white text-xs font-bold uppercase tracking-wider hover:bg-white/10 hover:text-cyan-400 transition-all duration-300 flex items-center gap-2"
+            >
+              Iniciar Motor
+            </button>
             <a
               href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20agendar%20una%20reuni%C3%B3n."
               target="_blank"
@@ -107,6 +121,16 @@ export const Navbar = () => {
                   {link.name}
                 </motion.a>
               ))}
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  window.dispatchEvent(new CustomEvent("velion-boost"));
+                }}
+                className="mt-4 px-8 py-3 rounded-full border border-white/10 bg-white/5 text-white font-bold uppercase tracking-wider hover:bg-white/10 hover:text-cyan-400 transition-all duration-300 flex items-center gap-2"
+              >
+                Iniciar Motor
+              </button>
 
               <motion.a
                 href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20agendar%20una%20reuni%C3%B3n."
