@@ -69,6 +69,8 @@ export const metadata: Metadata = {
 
 import { Providers } from "./providers";
 
+import { Navbar } from "./components/Navbar";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -80,7 +82,10 @@ export default function RootLayout({
         className={`${inter.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased bg-black text-white selection:bg-cyan-500/30`}
         suppressHydrationWarning
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

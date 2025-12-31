@@ -104,25 +104,25 @@ export default function BentoGrid() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
           <BentoCard
-            title="Agentes Autónomos"
-            description="Bots inteligentes con Gemini Flash que manejan atención al cliente 24/7, califican leads y agendan reuniones automáticamente."
+            title="Atención al Cliente 24/7"
+            description="Tu negocio nunca duerme. Responde consultas, envía precios y califica clientes automáticamente por WhatsApp."
             icon={MessageSquare}
             delay={0.1}
-            href="#contacto"
+            href="https://wa.me/5493541215803?text=Hola%20Brian,%20vi%20tu%20web%20VELION%20y%20quiero%20automatizar%20mi%20negocio."
           />
           <BentoCard
-            title="Workflows n8n"
-            description="Orquestación de procesos complejos. Conectamos tu CRM, ERP y herramientas de marketing para eliminar tareas manuales."
+            title="Agendamiento Automático"
+            description="Olvídate de coordinar horarios. El agente revisa tu Google Calendar y agenda citas sin superposiciones."
             icon={Share2}
             delay={0.2}
-            href="#contacto"
+            href="https://wa.me/5493541215803?text=Hola%20Brian,%20vi%20tu%20web%20VELION%20y%20quiero%20automatizar%20mi%20negocio."
           />
           <BentoCard
-            title="Consultoría Estratégica"
-            description="Auditoría profunda de tus operaciones actuales para identificar cuellos de botella y oportunidades de automatización con IA."
+            title="Automatización de Procesos"
+            description="Conectamos tus apps. Desde guardar ventas en Excel automáticamente hasta generar facturas o alertar a tu equipo."
             icon={ShieldCheck}
             delay={0.3}
-            href="#contacto"
+            href="https://wa.me/5493541215803?text=Hola%20Brian,%20vi%20tu%20web%20VELION%20y%20quiero%20automatizar%20mi%20negocio."
           />
         </div>
       </div>
