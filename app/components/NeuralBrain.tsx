@@ -83,6 +83,22 @@ const NeuralBrain = forwardRef<NeuralBrainRef, { className?: string }>(
       let width = 0;
       let height = 0;
       let animationId: number;
+      let isVisible = true; // Visibility flag
+
+      // Intersection Observer Setup
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            // Restart animation if it was stopped (optional, but good practice to ensure loop runs)
+            // In this implementation, the loop checks isVisible, so we just need to ensure it's running
+            // If we cancelled it, we'd need to restart.
+            // Let's stick to the check-inside-loop pattern for simplicity and robustness
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(canvas);
 
       const init = () => {
         // Use parent container dimensions
@@ -169,13 +185,22 @@ const NeuralBrain = forwardRef<NeuralBrainRef, { className?: string }>(
       };
 
       const animate = () => {
+        // PERFORMANCE: Stop loop if not visible
+        if (!isVisible) {
+          animationId = requestAnimationFrame(animate);
+          return;
+        }
+
         ctx.clearRect(0, 0, width, height);
 
         // Rotation logic
         const rot = rotationRef.current;
         rot.angleY += (rot.targetAngleY - rot.angleY) * 0.05;
         rot.angleX += (rot.targetAngleX - rot.angleX) * 0.05;
-        rot.targetAngleY += 0.002; // Auto rotate
+
+        // MOBILE: Faster auto-rotation if no interaction
+        const isMobile = width < 768;
+        rot.targetAngleY += isMobile ? 0.004 : 0.002;
 
         project();
 
@@ -267,12 +292,32 @@ const NeuralBrain = forwardRef<NeuralBrainRef, { className?: string }>(
         rotationRef.current.targetAngleX += y * 0.08;
       };
 
+      // MOBILE: Touch Events
+      const handleTouchMove = (e: TouchEvent) => {
+        // Prevent default to avoid scrolling while interacting with the brain (optional, but good for UX)
+        // e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = (touch.clientX - rect.left) / width - 0.5;
+        const y = (touch.clientY - rect.top) / height - 0.5;
+        rotationRef.current.targetAngleY += x * 0.08;
+        rotationRef.current.targetAngleX += y * 0.08;
+      };
+
+      const handleTouchStart = (e: TouchEvent) => {
+        // Optional: Reset momentum or trigger something
+      };
+
       const handleResize = () => {
         init();
       };
 
       window.addEventListener("resize", handleResize);
       canvas.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
+      canvas.addEventListener("touchstart", handleTouchStart, {
+        passive: true,
+      });
 
       init();
       animate();
@@ -283,7 +328,10 @@ const NeuralBrain = forwardRef<NeuralBrainRef, { className?: string }>(
       return () => {
         window.removeEventListener("resize", handleResize);
         canvas.removeEventListener("mousemove", handleMouseMove);
+        canvas.removeEventListener("touchmove", handleTouchMove);
+        canvas.removeEventListener("touchstart", handleTouchStart);
         cancelAnimationFrame(animationId);
+        observer.disconnect();
       };
     }, []);
 

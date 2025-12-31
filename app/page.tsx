@@ -45,6 +45,7 @@ import InfiniteMarquee from "./components/InfiniteMarquee";
 import SonarBackground from "./components/SonarBackground";
 import AuraEngine, { AuraEngineRef } from "./components/AuraEngine";
 import NeuralBrain, { NeuralBrainRef } from "./components/NeuralBrain";
+import { SystemBoot } from "./components/SystemBoot";
 
 import VelionLogo from "./components/VelionLogo";
 import { AnimatedTitle } from "./components/AnimatedTitle";
@@ -1210,6 +1211,7 @@ export default function VELION_Landing() {
       className="min-h-screen bg-transparent text-foreground font-sans selection:bg-cyan-500/30 selection:text-foreground overflow-x-hidden"
       suppressHydrationWarning
     >
+      <SystemBoot />
       <AuraEngine
         ref={auraEngineRef}
         showUI={false}
@@ -1339,7 +1341,7 @@ export default function VELION_Landing() {
               initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
-              className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
+              className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-xl text-shadow-sm"
             >
               Potencia tu negocio con{" "}
               <span className="text-cyan-400 text-glow font-serif italic relative inline-block">
@@ -1397,7 +1399,10 @@ export default function VELION_Landing() {
 
       {/* --- PRICING SECTION --- */}
       <section id="precios" className="py-24 bg-background relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-violet-900/10 rounded-full blur-[120px] pointer-events-none" />
+        <div
+          suppressHydrationWarning
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-violet-900/10 rounded-full blur-[120px] pointer-events-none"
+        />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-20">

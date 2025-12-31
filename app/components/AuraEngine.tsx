@@ -57,6 +57,16 @@ const AuraEngine = forwardRef<AuraEngineRef, AuraEngineProps>(
       let ambientInterval: NodeJS.Timeout | null = null;
       let animationId: number;
       let spacing = 24; // Default spacing
+      let isVisible = true; // Visibility flag
+
+      // Intersection Observer Setup
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(canvas);
 
       // --- CLASSES ---
       class Particle {
@@ -210,6 +220,12 @@ const AuraEngine = forwardRef<AuraEngineRef, AuraEngineProps>(
       triggerRef.current = startEngineSequence;
 
       const animate = () => {
+        // PERFORMANCE: Stop loop if not visible
+        if (!isVisible) {
+          animationId = requestAnimationFrame(animate);
+          return;
+        }
+
         // Clear with black
         ctx.fillStyle = "#000000";
         ctx.fillRect(0, 0, width, height);
@@ -294,6 +310,7 @@ const AuraEngine = forwardRef<AuraEngineRef, AuraEngineProps>(
         if (animationId) cancelAnimationFrame(animationId);
         if (ambientInterval) clearInterval(ambientInterval);
         if (engineInterval) clearInterval(engineInterval);
+        observer.disconnect();
       };
     }, []);
 

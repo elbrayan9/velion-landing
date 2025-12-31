@@ -3,24 +3,36 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export const SystemBoot = ({ isLaunching }: { isLaunching: boolean }) => {
+export const SystemBoot = () => {
   const [step, setStep] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (isLaunching) {
-      setStep(0);
-      const timeouts = [
-        setTimeout(() => setStep(1), 500), // Initializing
-        setTimeout(() => setStep(2), 1200), // Loading Modules
-        setTimeout(() => setStep(3), 1800), // System Operational
-      ];
-      return () => timeouts.forEach(clearTimeout);
-    }
-  }, [isLaunching]);
+    // Check if already booted
+    const hasBooted = sessionStorage.getItem("has_booted");
+    if (hasBooted) return;
+
+    // Start boot sequence
+    setIsVisible(true);
+    setStep(0);
+
+    const timeouts = [
+      setTimeout(() => setStep(1), 500), // Initializing
+      setTimeout(() => setStep(2), 1200), // Loading Modules
+      setTimeout(() => setStep(3), 1800), // System Operational
+      setTimeout(() => {
+        setIsVisible(false);
+        sessionStorage.setItem("has_booted", "true");
+      }, 2500), // Finish
+    ];
+    return () => timeouts.forEach(clearTimeout);
+  }, []);
+
+  if (!isVisible) return null;
 
   return (
     <AnimatePresence>
-      {isLaunching && (
+      {isVisible && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
