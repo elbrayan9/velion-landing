@@ -517,7 +517,7 @@ const ComplexityTimeline = () => {
     {
       level: "Nivel 3",
       title: "Integración Total",
-      desc: "Conexión profunda con tu ecosistema. Lee y escribe en tu Base de Datos o Excel. Ejecuta lógica de negocio compleja.",
+      desc: "Conexión profunda con tu ecosistema. Lee y escribe en tu Sistema de Gestión o Excel. Ejecuta lógica de negocio compleja.",
       icon: <Database size={24} className="text-pink-400" />,
     },
   ];
@@ -952,10 +952,10 @@ const InteractiveParserDemo = () => {
         </div>
         <div className="flex flex-col">
           <span className="text-xs text-white font-bold tracking-wide">
-            Parser Inteligente
+            Organizador de Pedidos
           </span>
           <span className="text-[10px] text-neutral-500">
-            Texto a JSON Estructurado
+            De Caos a Formato Listo
           </span>
         </div>
       </div>
@@ -1069,9 +1069,11 @@ const LiveDemoSection = () => {
           />
           <p className="text-neutral-400 max-w-2xl mx-auto">
             No es magia, es{" "}
-            <span className="text-cyan-400 font-bold">Google Gemini</span>.
-            Interactúe con las demos a continuación para ver el poder real de la
-            IA.
+            <span className="text-cyan-400 font-bold">
+              Inteligencia Artificial
+            </span>
+            . Interactúe con las demos a continuación para ver el poder real de
+            la IA.
           </p>
         </div>
 
@@ -1146,9 +1148,9 @@ const LiveDemoSection = () => {
                 </span>
               </div>
               <p className="text-neutral-400 text-sm leading-relaxed">
-                <strong>¡Escribe algo!</strong> Ingresa un texto desordenado
-                (ej: gastos) y mira cómo Gemini lo convierte en JSON
-                estructurado para tu base de datos.
+                <strong>¡Escribe algo!</strong> Ingresa un pedido desordenado
+                (ej: audio o texto) y mira cómo el sistema lo organiza para
+                facturar.
               </p>
             </div>
           </NeonCard>
