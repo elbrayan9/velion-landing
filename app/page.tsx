@@ -38,6 +38,7 @@ import {
   Database,
   Smartphone,
   ShoppingBag,
+  HeartHandshake,
 } from "lucide-react";
 import BentoGrid from "./components/BentoGrid";
 import InfiniteMarquee from "./components/InfiniteMarquee";
@@ -757,7 +758,7 @@ const InteractiveChatDemo = () => {
           </span>
         </div>
         <span className="text-[10px] text-cyan-400 border border-cyan-500/30 bg-cyan-950/30 px-2 py-0.5 rounded-full font-medium">
-          Gemini Powered
+          Respuesta Inmediata
         </span>
       </div>
 
@@ -1002,7 +1003,7 @@ const LiveDemoSection = () => {
               </div>
               <p className="text-neutral-400 text-sm leading-relaxed">
                 <strong>¡Pruébalo!</strong> Chatea con nuestro agente de ventas
-                impulsado por Gemini Flash. Responde dudas las 24hs.
+                con Inteligencia Artificial Avanzada. Responde dudas las 24hs.
               </p>
             </div>
           </NeonCard>
@@ -1277,6 +1278,45 @@ export default function VELION_Landing() {
 
       {/* --- PRICING SECTION --- */}
       <section id="precios" className="py-24 bg-background relative">
+        {/* --- TRUST BRIDGE SECTION --- */}
+        <div className="container mx-auto px-6 relative z-10 mb-24">
+          <div className="max-w-3xl mx-auto text-center relative">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-32 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-900/10 text-violet-400 text-xs font-bold uppercase tracking-wider mb-6">
+                <HeartHandshake size={14} className="text-violet-400" />{" "}
+                Potenciación Humana
+              </div>
+              <motion.h2
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
+                className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+              >
+                Potencia a tu equipo,{" "}
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-violet-400">
+                  no lo reemplaces.
+                </span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg text-neutral-400 leading-relaxed"
+              >
+                No venimos a quitar puestos de trabajo. Venimos a quitarle el
+                trabajo aburrido a tu gente. Libera a tus vendedores de
+                responder las mismas preguntas todo el día para que puedan
+                dedicarse a cerrar tratos y cuidar a tus clientes VIP.
+              </motion.p>
+            </div>
+          </div>
+        </div>
+
         <div
           suppressHydrationWarning
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-violet-900/10 rounded-full blur-[120px] pointer-events-none"
