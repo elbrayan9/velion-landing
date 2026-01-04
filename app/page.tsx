@@ -746,7 +746,7 @@ const InteractiveChatDemo = () => {
       // --- CONEXIÓN CON TU N8N (VELION SERVER) ---
       // Usamos tu webhook activo
       const response = await fetch(
-        "https://n8n.velion.com.ar/webhook-test/contacto",
+        "https://n8n.velion.com.ar/prueba-de-webhook/contacto",
         {
           method: "POST",
           headers: {
@@ -761,17 +761,15 @@ const InteractiveChatDemo = () => {
       );
 
       if (response.ok) {
-        // NOTA: Por ahora n8n solo devuelve "Recibido", más adelante
-        // configuraremos que devuelva la respuesta de la IA real.
-        const aiResponse =
-          "¡Mensaje recibido en el servidor de Velion! (Configurando IA...)";
+        // 1. Convertimos la respuesta cruda a JSON real
+        const data = await response.json();
 
+        // 2. Extraemos el texto de la IA (recordemos que en n8n pusiste la clave "mensaje")
+        // Si por alguna razón viene vacío, ponemos un texto por defecto.
+        const aiResponse = data.mensaje || "La IA no envió respuesta.";
+
+        // 3. Lo mostramos en el chat
         setMessages((prev) => [...prev, { role: "ai", text: aiResponse }]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: "ai", text: "Error conectando con el servidor." },
-        ]);
       }
     } catch (error) {
       console.error("Error:", error);
