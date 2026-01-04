@@ -50,6 +50,15 @@ import { SystemBoot } from "./components/SystemBoot";
 import VelionLogo from "./components/VelionLogo";
 import { AnimatedTitle } from "./components/AnimatedTitle";
 
+// --- NEW SECTIONS ---
+import { ComparisonSection } from "./components/ComparisonSection";
+import { MetricsSection } from "./components/MetricsSection";
+import { VsSection } from "./components/VsSection";
+import { TimelineSection } from "./components/TimelineSection";
+import { GuaranteeSection } from "./components/GuaranteeSection";
+import { SocialProofSection } from "./components/SocialProofSection";
+import { IntegrationsBanner } from "./components/IntegrationsBanner";
+
 // --- CUSTOM ICONS ---
 
 const WhatsAppIcon = ({
@@ -363,7 +372,7 @@ const QuickWinsSection = () => {
   return (
     <section
       id="soluciones"
-      className="py-24 bg-neutral-950 relative border-t border-white/5 overflow-hidden"
+      className="py-24 bg-black relative border-t border-white/5 overflow-hidden"
     >
       <SonarBackground opacity={0.3} />
       <div className="container mx-auto px-6 relative z-10">
@@ -1002,7 +1011,7 @@ const LiveDemoSection = () => {
   return (
     <section
       id="demo"
-      className="py-24 bg-neutral-950 relative border-t border-white/5 overflow-hidden"
+      className="py-24 bg-black relative border-t border-white/5 overflow-hidden"
     >
       <SonarBackground opacity={0.5} />
       <div className="container mx-auto px-6 relative z-10">
@@ -1115,7 +1124,7 @@ const LiveDemoSection = () => {
 
 const AdaptabilitySection = () => {
   return (
-    <section className="py-24 bg-neutral-950 relative overflow-hidden border-t border-white/5">
+    <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
@@ -1265,7 +1274,6 @@ export default function VELION_Landing() {
         showUI={false}
         className="fixed inset-0 z-0 pointer-events-none"
       />
-
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-transparent">
         {/* Spotlight Effect */}
@@ -1327,15 +1335,20 @@ export default function VELION_Landing() {
           </motion.div>
         </div>
       </section>
-
+      {/* --- INFINITE MARQUEE (Original) --- */}
       <InfiniteMarquee />
-
       {/* --- QUICK WINS SECTION --- */}
       <QuickWinsSection />
-
+      {/* --- SECCIÓN 1: COMPARATIVA --- */}
+      <ComparisonSection />
+      {/* --- SECCIÓN 2: MÉTRICAS --- */}
+      <MetricsSection />
       {/* --- LIVE DEMO SECTION --- */}
       <LiveDemoSection />
-
+      {/* --- SECCIÓN 6: PRUEBA SOCIAL --- */}
+      <SocialProofSection />
+      {/* --- SECCIÓN 3: VS (Empleado vs VELION) --- */}
+      <VsSection />
       {/* --- PRICING SECTION --- */}
       <section id="precios" className="py-24 bg-background relative">
         {/* --- TRUST BRIDGE SECTION --- */}
@@ -1518,19 +1531,18 @@ export default function VELION_Landing() {
           </div>
         </div>
       </section>
-
       {/* --- ADAPTABILITY SECTION --- */}
       <AdaptabilitySection />
-
       {/* --- FAQ SECTION --- */}
       <FAQSection />
-
+      {/* --- SECCIÓN 4: TIMELINE --- */}
+      <TimelineSection />
+      {/* --- SECCIÓN 5: GARANTÍA --- */}
+      <GuaranteeSection />
       {/* --- CONTACT FORM --- */}
       <ContactForm />
-
       {/* --- FOUNDER SECTION --- */}
       <FounderSection />
-
       {/* --- FOOTER --- */}
       <footer className="bg-black/50 backdrop-blur-xl border-t border-white/10 py-16">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
