@@ -19,7 +19,7 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Servicios", href: "#industrias" },
+    { name: "Soluciones", href: "#soluciones" },
     { name: "Cómo Funciona", href: "#demo" },
     { name: "Precios", href: "#precios" },
     { name: "FAQ", href: "#faq" },
