@@ -1347,44 +1347,49 @@ export default function VELION_Landing() {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
             {/* PLAN PYME - ARS */}
-            <NeonCard className="relative rounded-3xl p-8 border border-cyan-500/30 bg-cyan-950/10 flex flex-col">
-              <div className="absolute inset-x-0 top-0 h-1 bg-cyan-500" />
+            <NeonCard className="relative rounded-3xl p-8 border border-cyan-500/20 bg-gradient-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05)]">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
               <div className="mb-8 relative z-10">
-                <div className="inline-block px-3 py-1 bg-cyan-900/30 border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
+                <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
                   Agente Comercial
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
                   Plan PyME
                 </h3>
-                <div className="flex items-baseline gap-1 mt-4">
-                  <span className="text-4xl font-bold text-white">$85.000</span>
-                  <span className="text-neutral-400">ARS /mes</span>
+                <div className="flex items-baseline gap-1 mt-6">
+                  <span className="text-5xl font-bold text-white tracking-tighter">
+                    $85.000
+                  </span>
+                  <span className="text-cyan-200/60 font-medium">ARS /mes</span>
                 </div>
-                <div className="mt-4 p-3 bg-card border border-border rounded-lg flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
-                    <Zap size={16} />
+
+                <div className="mt-6 p-4 bg-cyan-950/30 border border-cyan-500/10 rounded-xl flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 shrink-0 border border-cyan-500/20">
+                    <Zap size={18} />
                   </div>
-                  <div className="text-sm">
-                    <span className="text-white font-semibold block">
+                  <div>
+                    <span className="text-cyan-100 font-semibold block text-sm">
                       Setup Inicial: $190.000 ARS
                     </span>
-                    <span className="text-white/50 text-xs">
-                      (Pago Único de Instalación)
+                    <span className="text-cyan-400/60 text-xs">
+                      Pago Único de Instalación
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4 mb-10 flex-1 relative z-10">
+              <div className="space-y-5 mb-10 flex-1 relative z-10">
                 {[
                   "Recepción 24/7 (Filtra curiosos)",
                   "Asistente de Ventas (Maneja objeciones)",
                   "Secretaria Virtual (Agenda reuniones)",
                   "Alerta de Ventas al Celular",
                 ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
-                    <span className="text-neutral-300 text-sm">{feature}</span>
+                  <div key={i} className="flex items-start gap-3 group">
+                    <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                    <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -1402,40 +1407,44 @@ export default function VELION_Landing() {
             {/* PLAN ENTERPRISE - USD */}
             <NeonCard
               delay={0.2}
-              className="relative rounded-3xl p-8 border border-white/10 bg-black/60 flex flex-col shadow-2xl"
+              className="relative rounded-3xl p-8 border border-violet-500/20 bg-gradient-to-b from-violet-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(139,92,246,0.05)]"
             >
-              <div className="absolute inset-x-0 top-0 h-1 bg-violet-500" />
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-50" />
               <div className="mb-8">
-                <div className="inline-block px-3 py-1 bg-violet-900/30 border border-violet-500/30 rounded-full text-violet-400 text-xs font-bold uppercase tracking-wider mb-4">
+                <div className="inline-block px-3 py-1 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(139,92,246,0.2)]">
                   Sistema Integral
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
                   Plan Enterprise
                 </h3>
-                <div className="flex flex-col mt-4">
-                  <span className="text-neutral-400 text-sm">
+                <div className="flex flex-col mt-6">
+                  <span className="text-violet-200/60 text-sm font-medium mb-1">
                     Proyectos desde
                   </span>
-                  <span className="text-4xl font-bold text-white">
+                  <span className="text-5xl font-bold text-white tracking-tighter">
                     US$ 1,500
                   </span>
                 </div>
-                <p className="text-neutral-400 text-sm mt-4 leading-relaxed">
+                <p className="text-neutral-400 text-sm mt-6 leading-relaxed border-l-2 border-violet-500/30 pl-4">
                   Automatización de procesos administrativos, contables y
                   logísticos complejos.
                 </p>
               </div>
 
-              <div className="space-y-4 mb-10 flex-1 border-t border-white/5 pt-8">
+              <div className="space-y-5 mb-10 flex-1 border-t border-white/5 pt-8">
                 {[
                   "Administración y Contabilidad",
                   "Logística y Control de Stock",
                   "Legal y Burocracia Automática",
                   "Analista de Negocio (Reportes)",
                 ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <span className="text-lg">🚀</span>
-                    <span className="text-neutral-300 text-sm">{feature}</span>
+                  <div key={i} className="flex items-start gap-3 group">
+                    <span className="text-lg grayscale group-hover:grayscale-0 transition-all duration-300">
+                      🚀
+                    </span>
+                    <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
