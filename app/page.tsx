@@ -146,7 +146,7 @@ export const Button = ({
       "bg-background text-foreground hover:bg-cyan-50 dark:hover:bg-cyan-900/20 hover:scale-105 border border-input",
     secondary:
       "bg-white/10 text-foreground backdrop-blur-md border border-white/10 hover:bg-white/20 hover:scale-105",
-    glow: "bg-gradient-to-r from-cyan-600 to-violet-600 text-white shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_50px_rgba(6,182,212,0.5)] border border-transparent hover:scale-105",
+    glow: "bg-linear-to-r from-cyan-600 to-violet-600 text-white shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_50px_rgba(6,182,212,0.5)] border border-transparent hover:scale-105",
     outline:
       "bg-transparent border border-white/20 text-foreground hover:border-white/50 hover:bg-white/5",
     icon: "h-8 w-8 px-0 rounded-full bg-cyan-600 text-white hover:bg-cyan-500",
@@ -1087,30 +1087,39 @@ const AdaptabilitySection = () => {
               title: "Entrenamiento a Medida",
               desc: "Entrenamos al agente con TU vocabulario y TUS políticas comerciales. No suena como un robot genérico.",
               icon: <Bot size={32} className="text-cyan-400" />,
+              delay: 0,
             },
             {
               title: "Integración Profunda",
               desc: "Se conecta con TUS herramientas actuales (Excel, Calendar, ERPs) sin romper nada. Tu información viaja sola.",
               icon: <Workflow size={32} className="text-violet-400" />,
+              delay: 0.2,
             },
             {
               title: "Seguridad Blindada",
               desc: "Seguridad total: Tus datos y los de tus clientes están protegidos con estándares bancarios.",
               icon: <ShieldCheck size={32} className="text-green-400" />,
+              delay: 0.4,
             },
           ].map((item, i) => (
             <NeonCard
               key={i}
-              delay={i * 0.1}
-              className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition-all group"
+              delay={item.delay}
+              className="relative bg-linear-to-b from-white/5 to-transparent border border-white/10 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition-all group p-8 rounded-2xl shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]"
             >
-              <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
-                {item.icon}
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10">
+                <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-cyan-500/20 group-hover:bg-cyan-500/10 transition-colors">
+                  {item.icon}
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors relative z-10">
                 {item.title}
               </h3>
-              <p className="text-neutral-400 leading-relaxed">{item.desc}</p>
+              <p className="text-neutral-400 leading-relaxed relative z-10">
+                {item.desc}
+              </p>
             </NeonCard>
           ))}
         </div>
@@ -1347,8 +1356,8 @@ export default function VELION_Landing() {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
             {/* PLAN PYME - ARS */}
-            <NeonCard className="relative rounded-3xl p-8 border border-cyan-500/20 bg-gradient-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05)]">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
+            <NeonCard className="relative rounded-3xl p-8 border border-cyan-500/20 bg-linear-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05)]">
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
               <div className="mb-8 relative z-10">
                 <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
                   Agente Comercial
@@ -1407,9 +1416,9 @@ export default function VELION_Landing() {
             {/* PLAN ENTERPRISE - USD */}
             <NeonCard
               delay={0.2}
-              className="relative rounded-3xl p-8 border border-violet-500/20 bg-gradient-to-b from-violet-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(139,92,246,0.05)]"
+              className="relative rounded-3xl p-8 border border-violet-500/20 bg-linear-to-b from-violet-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(139,92,246,0.05)]"
             >
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-50" />
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-violet-500 to-transparent opacity-50" />
               <div className="mb-8">
                 <div className="inline-block px-3 py-1 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(139,92,246,0.2)]">
                   Sistema Integral
