@@ -337,163 +337,59 @@ const INDUSTRY_TABS = [
   },
 ];
 
-const IndustryCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % INDUSTRY_TABS.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
+const QuickWinsSection = () => {
+  const wins = [
+    {
+      title: "Atención Instantánea",
+      desc: "Responde consultas y envía precios en segundos. Nunca más dejes un cliente en 'visto'.",
+      icon: <Zap size={32} className="text-cyan-400" />,
+      delay: 0,
+    },
+    {
+      title: "Agenda Automática",
+      desc: "Sincronización total con Google Calendar. El agente coordina días y horarios con el cliente sin molestarte.",
+      icon: <Calendar size={32} className="text-violet-400" />,
+      delay: 0.2,
+    },
+    {
+      title: "Gestión Administrativa",
+      desc: "Generación y envío automático de presupuestos, recibos o recordatorios de vencimiento.",
+      icon: <FileSpreadsheet size={32} className="text-pink-400" />,
+      delay: 0.4,
+    },
+  ];
 
   return (
     <section
-      id="industrias"
+      id="soluciones"
       className="py-24 bg-neutral-950 relative border-t border-white/5 overflow-hidden"
     >
-      <SonarBackground />
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4"
-          >
-            <Layers size={14} className="text-cyan-400" /> Versatilidad Extrema
-          </motion.div>
+      <SonarBackground opacity={0.3} />
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
           <AnimatedTitle
-            title="Un cerebro,"
-            highlight="infinitas posibilidades."
+            title="Resultados"
+            highlight="Inmediatos"
             className="mb-6"
           />
           <p className="text-neutral-400 max-w-2xl mx-auto">
-            Nuestros agentes no son plantillas rígidas. Se entrenan
-            específicamente para el vocabulario y procesos de su industria.
+            Soluciones rápidas que impactan en tu facturación desde el día 1.
           </p>
         </div>
 
-        {/* Flat Carousel Container */}
-        <div
-          className="relative w-full max-w-7xl mx-auto h-137.5 flex items-start justify-center overflow-visible mt-4"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="absolute w-full flex justify-center items-center">
-            <AnimatePresence mode="popLayout">
-              {INDUSTRY_TABS.map((tab, index) => {
-                // Calculate position relative to active index
-                // We want a flat row: Left (-1), Center (0), Right (1)
-                // We need to handle the wrap-around logic for indices
-
-                const getOffset = (
-                  idx: number,
-                  active: number,
-                  length: number
-                ) => {
-                  let diff = idx - active;
-                  if (diff > length / 2) diff -= length;
-                  if (diff < -length / 2) diff += length;
-                  return diff;
-                };
-
-                const offset = getOffset(
-                  index,
-                  activeIndex,
-                  INDUSTRY_TABS.length
-                );
-
-                // Only render visible cards (center and immediate neighbors)
-                // Actually, let's render all but hide distant ones to keep it smooth
-                const isVisible = Math.abs(offset) <= 2;
-
-                if (!isVisible) return null;
-
-                return (
-                  <motion.div
-                    key={tab.id}
-                    className="absolute top-0"
-                    initial={false}
-                    animate={{
-                      x: `${offset * 105}%`, // 105% to leave a tiny gap (5%)
-                      scale: 1, // Removed scaling to fix blurriness
-                      opacity: offset === 0 ? 1 : 0.5,
-                      zIndex: offset === 0 ? 10 : 0,
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    style={{
-                      width: "100%",
-                      maxWidth: "400px",
-                      left: "50%",
-                      marginLeft: "-200px", // Center the card
-                    }}
-                  >
-                    <NeonCard className="bg-card/90 rounded-3xl p-8 flex flex-col relative overflow-hidden group border border-white/10 hover:border-white/20 transition-colors h-112.5">
-                      {/* Inner Gradient */}
-                      <div
-                        className={`absolute top-0 right-0 w-64 h-64 bg-linear-to-br ${tab.color} opacity-10 group-hover:opacity-20 rounded-full blur-[80px] transition-opacity`}
-                      />
-
-                      <div className="relative z-10 flex flex-col h-full">
-                        <div
-                          className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tab.color} flex items-center justify-center mb-6 shadow-lg`}
-                          suppressHydrationWarning
-                        >
-                          {React.cloneElement(
-                            tab.icon as React.ReactElement<{
-                              className?: string;
-                            }>,
-                            {
-                              className: "text-white",
-                            }
-                          )}
-                        </div>
-
-                        <h3 className="text-2xl font-bold text-white mb-2">
-                          {tab.title}
-                        </h3>
-
-                        <div className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4">
-                          {tab.label}
-                        </div>
-
-                        <p className="text-neutral-400 leading-relaxed mb-8 grow">
-                          {tab.description}
-                        </p>
-
-                        <Button
-                          variant="outline"
-                          href="https://wa.me/5493541215803?text=Hola%20Brian,%20vi%20tu%20web%20VELION%20y%20quiero%20automatizar%20mi%20negocio."
-                          target="_blank"
-                          className="w-full border-white/10 hover:bg-white/5"
-                        >
-                          Solicitar Demo
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                      </div>
-                    </NeonCard>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
-          {INDUSTRY_TABS.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                idx === activeIndex
-                  ? "w-8 bg-cyan-400"
-                  : "bg-white/20 hover:bg-white/40"
-              }`}
-            />
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {wins.map((win, i) => (
+            <NeonCard
+              key={i}
+              delay={win.delay}
+              className="bg-card/50 p-8 rounded-3xl border border-white/10 hover:border-cyan-500/30 transition-all group"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                {win.icon}
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">{win.title}</h3>
+              <p className="text-neutral-400 leading-relaxed">{win.desc}</p>
+            </NeonCard>
           ))}
         </div>
       </div>
@@ -615,8 +511,13 @@ const ContactForm = () => {
             <AnimatedTitle
               title="Hablemos de"
               highlight="tu Proyecto"
-              className="mb-8"
+              className="mb-6"
             />
+            <p className="text-neutral-400 mb-8 max-w-md leading-relaxed">
+              ¿Te preocupa que sea difícil? Nosotros lo hacemos llave en mano.
+              El sistema se encarga del trabajo repetitivo para que tu equipo
+              humano pueda dedicarse a lo estratégico y creativo.
+            </p>
             <div className="space-y-6">
               <div className="flex items-center gap-4 text-neutral-300">
                 <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-cyan-400">
@@ -642,7 +543,6 @@ const ContactForm = () => {
               </div>
             </div>
           </div>
-
           <NeonCard className="bg-card/50 rounded-3xl p-8 backdrop-blur-xl border border-border">
             <form onSubmit={handleSend} className="space-y-6">
               <div className="space-y-2">
@@ -1164,6 +1064,57 @@ const LiveDemoSection = () => {
   );
 };
 
+const AdaptabilitySection = () => {
+  return (
+    <section className="py-24 bg-neutral-950 relative overflow-hidden border-t border-white/5">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <ShieldCheck size={14} className="text-cyan-400" /> Tecnología
+            Invisible
+          </div>
+          <AnimatedTitle
+            title="Se adapta a las reglas"
+            highlight="de TU juego"
+            className="mb-6"
+          />
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {[
+            {
+              title: "Entrenamiento a Medida",
+              desc: "Entrenamos al agente con TU vocabulario y TUS políticas comerciales. No suena como un robot genérico.",
+              icon: <Bot size={32} className="text-cyan-400" />,
+            },
+            {
+              title: "Integración Profunda",
+              desc: "Se conecta con TUS herramientas actuales (Excel, Calendar, ERPs) sin romper nada. Tu información viaja sola.",
+              icon: <Workflow size={32} className="text-violet-400" />,
+            },
+            {
+              title: "Seguridad Blindada",
+              desc: "Seguridad total: Tus datos y los de tus clientes están protegidos con estándares bancarios.",
+              icon: <ShieldCheck size={32} className="text-green-400" />,
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors"
+            >
+              <div className="mb-6">{item.icon}</div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                {item.title}
+              </h3>
+              <p className="text-neutral-400 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- FAQ SECTION ---
 const FAQSection = () => {
   const faqs = [
@@ -1257,8 +1208,6 @@ export default function VELION_Landing() {
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-transparent">
         {/* Spotlight Effect */}
-
-        {/* Spotlight Effect */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-125 bg-accent/20 blur-[120px] rounded-full pointer-events-none opacity-50" />
 
         <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center">
@@ -1287,30 +1236,19 @@ export default function VELION_Landing() {
               transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
               className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-xl text-shadow-sm"
             >
-              Tu Negocio en Piloto Automático con{" "}
-              <span className="text-cyan-400 text-glow font-serif italic relative inline-block">
-                <span className="absolute inset-0 blur-sm bg-black/50 -z-10 rounded-lg transform scale-110"></span>
-                Inteligencia Artificial
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.5,
-                    ease: "circOut",
-                  }}
-                  className="absolute bottom-1 left-0 w-full h-0.5 bg-cyan-500/30 origin-left rounded-full"
-                />
-              </span>
+              Tu negocio pierde oportunidades{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-violet-400">
+                mientras duermes.
+              </span>{" "}
+              Nosotros no.
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="text-lg text-white/90 leading-relaxed mb-10 max-w-xl mx-auto font-light drop-shadow-md bg-black/20 backdrop-blur-sm p-4 rounded-xl border border-white/5"
             >
-              Centralizamos y automatizamos toda tu operación: Ventas, Atención
-              al Cliente y Tareas Administrativas en un solo sistema
-              inteligente.
+              Instalamos Agentes Inteligentes que atienden, venden y administran
+              tu empresa. Automatiza lo aburrido, escala lo importante.
             </motion.p>
 
             <motion.div
@@ -1319,11 +1257,10 @@ export default function VELION_Landing() {
             >
               <Button
                 variant="shiny"
-                href="https://wa.me/5493541215803?text=Hola%20Brian,%20vi%20tu%20web%20VELION%20y%20quiero%20automatizar%20mi%20negocio."
-                target="_blank"
+                href="#demo"
                 className="shiny-cta shadow-2xl shadow-cyan-500/20"
               >
-                Consultar por Automatización 360°
+                Ver a mi Nuevo Empleado Digital
               </Button>
             </motion.div>
           </motion.div>
@@ -1332,8 +1269,8 @@ export default function VELION_Landing() {
 
       <InfiniteMarquee />
 
-      {/* --- INDUSTRY SECTION --- */}
-      <IndustryCarousel />
+      {/* --- QUICK WINS SECTION --- */}
+      <QuickWinsSection />
 
       {/* --- LIVE DEMO SECTION --- */}
       <LiveDemoSection />
@@ -1353,8 +1290,8 @@ export default function VELION_Landing() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
             <AnimatedTitle
-              title="Planes"
-              highlight="Simples"
+              title="Inversión"
+              highlight="Inteligente"
               className="mb-6"
             />
             <div className="overflow-hidden mb-6">
@@ -1365,31 +1302,25 @@ export default function VELION_Landing() {
                 transition={{ delay: 0.2 }}
                 className="text-white/60 max-w-2xl mx-auto text-lg"
               >
-                Inversión clara. Sin costos ocultos.
+                Dos caminos para escalar. Elige tu velocidad.
               </motion.p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
-            {/* PLAN 1: SUSCRIPCIÓN INTEGRAL */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+            {/* PLAN PYME - ARS */}
             <NeonCard className="relative rounded-3xl p-8 border border-cyan-500/30 bg-cyan-950/10 flex flex-col">
-              <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                <Cpu size={120} />
-              </div>
-              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-cyan-500 to-violet-500" />
-
+              <div className="absolute inset-x-0 top-0 h-1 bg-cyan-500" />
               <div className="mb-8 relative z-10">
                 <div className="inline-block px-3 py-1 bg-cyan-900/30 border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
-                  Recomendado PyMEs
+                  Agente Comercial
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Suscripción Integral
+                  Plan PyME
                 </h3>
                 <div className="flex items-baseline gap-1 mt-4">
-                  <span className="text-4xl font-bold text-white">
-                    $60.000 ARS
-                  </span>
-                  <span className="text-neutral-400">/mes</span>
+                  <span className="text-4xl font-bold text-white">$85.000</span>
+                  <span className="text-neutral-400">ARS /mes</span>
                 </div>
                 <div className="mt-4 p-3 bg-card border border-border rounded-lg flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
@@ -1397,22 +1328,21 @@ export default function VELION_Landing() {
                   </div>
                   <div className="text-sm">
                     <span className="text-white font-semibold block">
-                      Setup Inicial: $150.000 ARS
+                      Setup Inicial: $190.000 ARS
                     </span>
-                    <span className="text-white/50 text-xs">(Pago Único)</span>
+                    <span className="text-white/50 text-xs">
+                      (Pago Único de Instalación)
+                    </span>
                   </div>
                 </div>
-                <p className="text-xs text-neutral-500 mt-2">
-                  *Precios sujetos a actualización mensual según IPC
-                </p>
               </div>
 
               <div className="space-y-4 mb-10 flex-1 relative z-10">
                 {[
-                  "Agente de IA para WhatsApp",
-                  "Agendamiento en Google Calendar",
-                  "Reportes Básicos en Excel",
-                  "Soporte Técnico Prioritario",
+                  "Recepción 24/7 (Filtra curiosos)",
+                  "Asistente de Ventas (Maneja objeciones)",
+                  "Secretaria Virtual (Agenda reuniones)",
+                  "Alerta de Ventas al Celular",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
@@ -1423,43 +1353,47 @@ export default function VELION_Landing() {
 
               <Button
                 variant="shiny"
-                href="https://wa.me/5493541215803?text=Hola%20Brian,%20me%20interesa%20el%20Plan%20Suscripci%C3%B3n%20Integral."
+                href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20contratar%20el%20Agente%20Comercial%20(Plan%20PyME)."
                 target="_blank"
-                className="w-full relative z-10"
+                className="w-full relative z-10 shiny-cta"
               >
-                Comenzar Ahora
+                Contratar Agente
               </Button>
             </NeonCard>
 
-            {/* PLAN 2: CORPORATIVO */}
+            {/* PLAN ENTERPRISE - USD */}
             <NeonCard
               delay={0.2}
-              className="relative rounded-3xl p-8 border border-white/10 bg-black/40 flex flex-col"
+              className="relative rounded-3xl p-8 border border-white/10 bg-black/60 flex flex-col shadow-2xl"
             >
+              <div className="absolute inset-x-0 top-0 h-1 bg-violet-500" />
               <div className="mb-8">
+                <div className="inline-block px-3 py-1 bg-violet-900/30 border border-violet-500/30 rounded-full text-violet-400 text-xs font-bold uppercase tracking-wider mb-4">
+                  Sistema Integral
+                </div>
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Enterprise / A Medida
+                  Plan Enterprise
                 </h3>
                 <div className="flex flex-col mt-4">
-                  <span className="text-4xl font-bold text-white">
-                    Consultar
+                  <span className="text-neutral-400 text-sm">
+                    Proyectos desde
                   </span>
-                  <span className="text-neutral-400 text-sm mt-1">
-                    Soluciones a medida
+                  <span className="text-4xl font-bold text-white">
+                    US$ 1,500
                   </span>
                 </div>
                 <p className="text-neutral-400 text-sm mt-4 leading-relaxed">
-                  Para fábricas y grandes empresas. Integración con ERPs, CRMs y
-                  volúmenes altos de conversación.
+                  Automatización de procesos administrativos, contables y
+                  logísticos complejos.
                 </p>
               </div>
 
               <div className="space-y-4 mb-10 flex-1 border-t border-white/5 pt-8">
                 {[
-                  "Integración con ERP y Stock",
-                  "Generación de Documentos (PDFs)",
-                  "Lógica de Negocio Compleja",
-                  "Gestor de Cuenta Dedicado",
+                  "Administración y Contabilidad",
+                  "Logística y Control de Stock",
+                  "Legal y Burocracia Automática",
+                  "Analista de Negocio (Reportes)",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <span className="text-lg">🚀</span>
@@ -1470,16 +1404,19 @@ export default function VELION_Landing() {
 
               <Button
                 variant="outline"
-                href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20consultar%20por%20el%20Plan%20Enterprise."
+                href="https://wa.me/5493541215803?text=Hola%20Brian,%20necesito%20una%20Auditor%C3%ADa%20de%20Procesos%20para%20mi%20empresa."
                 target="_blank"
                 className="w-full border-white/10 hover:bg-white/5"
               >
-                Agendar Reunión
+                Solicitar Auditoría de Procesos
               </Button>
             </NeonCard>
           </div>
         </div>
       </section>
+
+      {/* --- ADAPTABILITY SECTION --- */}
+      <AdaptabilitySection />
 
       {/* --- FAQ SECTION --- */}
       <FAQSection />
