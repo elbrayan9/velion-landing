@@ -717,6 +717,7 @@ const FounderSection = () => {
 // --- COMPONENTES DE LA DEMO ---
 
 const InteractiveChatDemo = () => {
+  const [hasFinished, setHasFinished] = useState(false); // Nuevo estado
   const [messages, setMessages] = useState([
     {
       role: "ai",
@@ -761,11 +762,10 @@ const InteractiveChatDemo = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Extraemos el texto de la respuesta (coincide con el nodo n8n "mensaje")
         const aiResponse = data.mensaje || "La IA no envió respuesta.";
         setMessages((prev) => [...prev, { role: "ai", text: aiResponse }]);
-      } else {
-        throw new Error("Error en la respuesta del servidor");
+
+        setHasFinished(true); // <--- AGREGA ESTA LÍNEA (Bloquea el chat)
       }
     } catch (error) {
       console.error("Error:", error);
@@ -831,22 +831,39 @@ const InteractiveChatDemo = () => {
       </div>
 
       {/* Input */}
-      <div className="p-3 bg-neutral-900/50 border-t border-white/5 flex gap-2">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          placeholder="Escribe tu consulta..."
-          className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500/50 transition-colors"
-        />
-        <button
-          onClick={handleSend}
-          disabled={loading}
-          className="bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded-lg transition-colors disabled:opacity-50"
-        >
-          <Send size={14} />
-        </button>
+      {/* Input o Botón de Contacto según el estado */}
+      <div className="p-3 bg-neutral-900/50 border-t border-white/5">
+        {!hasFinished ? (
+          // MODO CHAT: Se puede escribir
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder="Escribe tu consulta..."
+              className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500/50 transition-colors"
+            />
+            <button
+              onClick={handleSend}
+              disabled={loading}
+              className="bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded-lg transition-colors disabled:opacity-50"
+            >
+              <Send size={14} />
+            </button>
+          </div>
+        ) : (
+          // MODO BLOQUEADO: Botón de WhatsApp
+          <a
+            href="https://wa.me/5493541215803" // TU NUMERO AQUI
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded-lg font-bold text-xs transition-all animate-pulse"
+          >
+            <WhatsAppIcon size={16} />
+            Continuar en WhatsApp (Demo Finalizada)
+          </a>
+        )}
       </div>
     </div>
   );
