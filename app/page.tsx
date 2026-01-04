@@ -939,8 +939,8 @@ const CalendarMockup = () => (
       </div>
       <div className="mt-auto p-3 bg-neutral-900/50 rounded-lg border border-white/5 text-center backdrop-blur-sm">
         <p className="text-[10px] text-neutral-400 italic">
-          "Este agente se conecta directamente a la API de Google Calendar para
-          bloquear slots en tiempo real."
+          "Este agente se conecta directamente a tu Calendario en tiempo real
+          para bloquear slots."
         </p>
       </div>
     </div>
@@ -1124,7 +1124,7 @@ const FAQSection = () => {
     },
     {
       q: "¿Hay riesgo de que bloqueen mi WhatsApp?",
-      a: "No. Utilizamos la API Oficial de Meta (WhatsApp Business API) y técnicas de 'Human-Like Timing' para garantizar la seguridad de tu línea.",
+      a: "No. Utilizamos tecnología oficial verificada por WhatsApp y técnicas de 'Human-Like Timing' para garantizar la seguridad de tu línea.",
     },
     {
       q: "¿Sirve para mi rubro específico?",
@@ -1274,11 +1274,6 @@ export default function VELION_Landing() {
 
       {/* --- LIVE DEMO SECTION --- */}
       <LiveDemoSection />
-
-      <BentoGrid />
-
-      {/* --- COMPLEXITY TIMELINE --- */}
-      <ComplexityTimeline />
 
       {/* --- PRICING SECTION --- */}
       <section id="precios" className="py-24 bg-background relative">
