@@ -738,13 +738,47 @@ const InteractiveChatDemo = () => {
 
     const userMsg = input;
     setInput("");
+    // Agregamos el mensaje del usuario a la lista visual
     setMessages((prev) => [...prev, { role: "user", text: userMsg }]);
     setLoading(true);
 
-    const aiResponse = (await callGeminiChat(messages, userMsg)) as string;
+    try {
+      // --- CONEXIÓN CON TU N8N (VELION SERVER) ---
+      // Usamos tu webhook activo
+      const response = await fetch(
+        "https://n8n.velion.com.ar/webhook-test/contacto",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: userMsg,
+            type: "chat_message", // Para diferenciarlo del formulario de contacto
+            timestamp: new Date().toISOString(),
+          }),
+        }
+      );
 
-    setMessages((prev) => [...prev, { role: "ai", text: aiResponse }]);
-    setLoading(false);
+      if (response.ok) {
+        // NOTA: Por ahora n8n solo devuelve "Recibido", más adelante
+        // configuraremos que devuelva la respuesta de la IA real.
+        const aiResponse =
+          "¡Mensaje recibido en el servidor de Velion! (Configurando IA...)";
+
+        setMessages((prev) => [...prev, { role: "ai", text: aiResponse }]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: "ai", text: "Error conectando con el servidor." },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setMessages((prev) => [...prev, { role: "ai", text: "Error de red." }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

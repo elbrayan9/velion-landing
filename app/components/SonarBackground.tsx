@@ -21,6 +21,7 @@ export default function SonarBackground({
     <div
       className={`absolute inset-0 w-full h-full pointer-events-none z-0 flex items-center justify-center ${className}`}
       style={{ opacity }}
+      suppressHydrationWarning
     >
       <svg
         className="w-full h-full max-w-250 overflow-visible"
