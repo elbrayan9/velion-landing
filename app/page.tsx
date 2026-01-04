@@ -1099,16 +1099,19 @@ const AdaptabilitySection = () => {
               icon: <ShieldCheck size={32} className="text-green-400" />,
             },
           ].map((item, i) => (
-            <div
+            <NeonCard
               key={i}
-              className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors"
+              delay={i * 0.1}
+              className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition-all group"
             >
-              <div className="mb-6">{item.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
                 {item.title}
               </h3>
               <p className="text-neutral-400 leading-relaxed">{item.desc}</p>
-            </div>
+            </NeonCard>
           ))}
         </div>
       </div>
@@ -1294,7 +1297,7 @@ export default function VELION_Landing() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
-                className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+                className="text-3xl md:text-5xl font-sans font-bold text-white mb-6 tracking-tight drop-shadow-xl text-shadow-sm"
               >
                 Potencia a tu equipo,{" "}
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-violet-400">
