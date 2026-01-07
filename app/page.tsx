@@ -1,50 +1,29 @@
 "use client";
 
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  cloneElement,
-  type ReactElement,
-} from "react";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import React, { useState, useEffect, useRef, type ReactElement } from "react";
+import { motion, type Variants } from "framer-motion";
 import {
   Bot,
   Workflow,
-  ChevronRight,
   Check,
   CheckCircle2,
-  Cpu,
   ShieldCheck,
   Calendar,
   MessageSquare,
   FileSpreadsheet,
-  User,
   ArrowRight,
   Zap,
   Globe,
   Send,
   Loader2,
   Code,
-  Instagram,
   Linkedin,
   Quote,
-  Building,
-  Building2,
-  Stethoscope,
-  Utensils,
-  Briefcase,
-  Layers,
-  Database,
-  Smartphone,
-  ShoppingBag,
   HeartHandshake,
 } from "lucide-react";
-import BentoGrid from "./components/BentoGrid";
 import InfiniteMarquee from "./components/InfiniteMarquee";
 import SonarBackground from "./components/SonarBackground";
 import AuraEngine, { AuraEngineRef } from "./components/AuraEngine";
-import NeuralBrain, { NeuralBrainRef } from "./components/NeuralBrain";
 import { SystemBoot } from "./components/SystemBoot";
 
 import VelionLogo from "./components/VelionLogo";
@@ -57,7 +36,10 @@ import { VsSection } from "./components/VsSection";
 import { TimelineSection } from "./components/TimelineSection";
 import { GuaranteeSection } from "./components/GuaranteeSection";
 import { SocialProofSection } from "./components/SocialProofSection";
-import { IntegrationsBanner } from "./components/IntegrationsBanner";
+import { ServicesSection } from "./components/ServicesSection";
+import { IsThisForYouSection } from "./components/IsThisForYouSection";
+import { IndustriesSection } from "./components/IndustriesSection";
+import { Button } from "./components/Button";
 
 // --- CUSTOM ICONS ---
 
@@ -80,38 +62,6 @@ const WhatsAppIcon = ({
   </svg>
 );
 
-// --- FUNCIONES SIMULADAS DE GEMINI (Mock) ---
-const callGeminiChat = async (history: unknown, userMessage: unknown) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        "¡Hola! Soy el asistente virtual de VELION. Puedo ayudarte a automatizar tus ventas, agenda o administración. ¿Qué te interesa mejorar hoy?"
-      );
-    }, 1200);
-  });
-};
-
-const callGeminiParser = async (text: unknown) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        JSON.stringify(
-          {
-            monto: 15000,
-            moneda: "ARS",
-            destinatario: "M. Rodriguez",
-            concepto: "servicio tecnico",
-            fecha: new Date().toISOString().split("T")[0],
-            confidence: 0.98,
-          },
-          null,
-          2
-        )
-      );
-    }, 1500);
-  });
-};
-
 // --- ANIMATION UTILS ---
 
 const fadeInUp: Variants = {
@@ -130,128 +80,6 @@ const staggerContainer: Variants = {
 };
 
 // --- UI COMPONENTS ---
-
-export const Button = ({
-  children,
-  variant = "primary",
-  className = "",
-  href,
-  onClick,
-  ...props
-}: {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary" | "glow" | "outline" | "icon" | "shiny";
-  className?: string;
-  href?: string;
-  onClick?: React.MouseEventHandler<HTMLElement>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}) => {
-  const baseStyles =
-    "inline-flex items-center justify-center rounded-lg text-sm font-bold transition-all duration-300 focus-visible:outline-none h-12 px-8 cursor-pointer tracking-wide relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed";
-
-  const variants = {
-    primary:
-      "bg-background text-foreground hover:bg-cyan-50 dark:hover:bg-cyan-900/20 hover:scale-105 border border-input",
-    secondary:
-      "bg-white/10 text-foreground backdrop-blur-md border border-white/10 hover:bg-white/20 hover:scale-105",
-    glow: "bg-linear-to-r from-cyan-600 to-violet-600 text-white shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_50px_rgba(6,182,212,0.5)] border border-transparent hover:scale-105",
-    outline:
-      "bg-transparent border border-white/20 text-foreground hover:border-white/50 hover:bg-white/5",
-    icon: "h-8 w-8 px-0 rounded-full bg-cyan-600 text-white hover:bg-cyan-500",
-    shiny: "shiny-cta",
-  };
-
-  const handleScroll = (e: React.MouseEvent<HTMLElement>) => {
-    if (onClick) onClick(e);
-    if (href && href.startsWith("#")) {
-      e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
-  const content = (
-    <>
-      <span className="relative z-10 flex items-center gap-2">{children}</span>
-      {variant === "glow" && (
-        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full duration-700 transition-transform bg-linear-to-r from-transparent via-white/20 to-transparent" />
-      )}
-    </>
-  );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        onClick={handleScroll}
-        className={`${baseStyles} ${variants[variant]} ${className}`}
-        suppressHydrationWarning
-        {...props}
-      >
-        {content}
-      </a>
-    );
-  }
-  return (
-    <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      onClick={onClick}
-      suppressHydrationWarning
-      {...props}
-    >
-      {content}
-    </button>
-  );
-};
-
-// 1. Typewriter Effect Component
-const TypewriterText = ({
-  text,
-  className = "",
-  delay = 0,
-  as: Component = "h2",
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-  as?: React.ElementType;
-}) => {
-  const characters = Array.from(text);
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.03, delayChildren: delay },
-    },
-  };
-
-  const child = {
-    hidden: { opacity: 0, y: 5 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      className={className}
-    >
-      <Component className="inline-block">
-        {characters.map((char, index) => (
-          <motion.span key={index} variants={child}>
-            {char === " " ? "\u00A0" : char}
-          </motion.span>
-        ))}
-      </Component>
-    </motion.div>
-  );
-};
 
 // 2. Neon Card Wrapper
 const NeonCard = ({
@@ -295,194 +123,6 @@ const NeonCard = ({
   );
 };
 
-// --- THREE.JS HERO COMPONENT REMOVED ---
-
-// --- NEW COMPONENTS FOR VERSATILITY ---
-
-const INDUSTRY_TABS = [
-  {
-    id: 0,
-    label: "Inmobiliaria",
-    icon: <Building2 size={24} />,
-    title: "Gestión Inmobiliaria Total",
-    description:
-      "Calificación de inquilinos, generación automática de contratos y coordinación de visitas.",
-    color: "from-cyan-500 to-blue-500",
-  },
-  {
-    id: 1,
-    label: "Salud",
-    icon: <Stethoscope size={24} />,
-    title: "Administración Médica",
-    description:
-      "Base de datos de pacientes, confirmación de turnos y recordatorios pre-operatorios.",
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    id: 2,
-    label: "Gastronomía",
-    icon: <Utensils size={24} />,
-    title: "Logística & Delivery",
-    description:
-      "Recepción de pedidos, control de comandas en cocina y aviso automático a repartidores.",
-    color: "from-orange-500 to-red-500",
-  },
-  {
-    id: 3,
-    label: "Servicios Prof.",
-    icon: <Briefcase size={24} />,
-    title: "Despacho Legal Automático",
-    description:
-      "Análisis de documentos, filtrado de casos y redacción de borradores simples.",
-    color: "from-violet-500 to-purple-500",
-  },
-  {
-    id: 4,
-    label: "Comercios",
-    icon: <ShoppingBag size={24} />,
-    title: "Stock & Ventas",
-    description:
-      "Respuestas sobre precios, actualización de inventario y alerta de falta de stock.",
-    color: "from-pink-500 to-rose-500",
-  },
-];
-
-const QuickWinsSection = () => {
-  const wins = [
-    {
-      title: "Atención Instantánea",
-      desc: "Responde consultas y envía precios en segundos. Nunca más dejes un cliente en 'visto'.",
-      icon: <Zap size={32} className="text-cyan-400" />,
-      delay: 0,
-    },
-    {
-      title: "Agenda Automática",
-      desc: "Sincronización total con Google Calendar. El agente coordina días y horarios con el cliente sin molestarte.",
-      icon: <Calendar size={32} className="text-violet-400" />,
-      delay: 0.2,
-    },
-    {
-      title: "Gestión Administrativa",
-      desc: "Generación y envío automático de presupuestos, recibos o recordatorios de vencimiento.",
-      icon: <FileSpreadsheet size={32} className="text-pink-400" />,
-      delay: 0.4,
-    },
-  ];
-
-  return (
-    <section
-      id="soluciones"
-      className="py-24 bg-black relative border-t border-white/5 overflow-hidden"
-    >
-      <SonarBackground opacity={0.3} />
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <AnimatedTitle
-            title="Resultados"
-            highlight="Inmediatos"
-            className="mb-6"
-          />
-          <p className="text-neutral-400 max-w-2xl mx-auto">
-            Soluciones rápidas que impactan en tu facturación desde el día 1.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {wins.map((win, i) => (
-            <NeonCard
-              key={i}
-              delay={win.delay}
-              className="bg-card/50 p-8 rounded-3xl border border-white/10 hover:border-cyan-500/30 transition-all group"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                {win.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">{win.title}</h3>
-              <p className="text-neutral-400 leading-relaxed">{win.desc}</p>
-            </NeonCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const ComplexityTimeline = () => {
-  const levels = [
-    {
-      level: "Nivel 1",
-      title: "Smart FAQ",
-      desc: "El agente responde dudas frecuentes 24/7 con información estática de tu empresa. Ideal para reducir consultas repetitivas.",
-      icon: <MessageSquare size={24} className="text-cyan-400" />,
-    },
-    {
-      level: "Nivel 2",
-      title: "Gestión Operativa",
-      desc: "El agente realiza tareas: Agendar en Calendar, enviar presupuestos PDF o actualizar planillas de Excel.",
-      icon: <Zap size={24} className="text-violet-400" />,
-    },
-    {
-      level: "Nivel 3",
-      title: "Piloto Automático (Enterprise)",
-      desc: "Conexión profunda con tu ERP o Sistema de Facturación. Manejo de stock, logística y contabilidad sin intervención humana.",
-      icon: <Database size={24} className="text-pink-400" />,
-    },
-  ];
-
-  return (
-    <section className="py-24 bg-black relative overflow-hidden">
-      <SonarBackground opacity={0.3} />
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
-            Escalabilidad
-          </div>
-          <AnimatedTitle
-            title="De lo Simple"
-            highlight="a lo Complejo"
-            className="mb-4"
-          />
-          <p className="text-neutral-400">
-            Escalamos la inteligencia artificial según la madurez digital de su
-            negocio.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 relative max-w-6xl mx-auto">
-          {/* Connector Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-cyan-900 via-violet-900 to-pink-900 -z-10" />
-
-          {levels.map((lvl, i) => (
-            <NeonCard
-              key={i}
-              delay={i * 0.2}
-              className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 transition-all group border border-border"
-            >
-              <div className="w-16 h-16 bg-background border border-border rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform shadow-xl relative z-10">
-                {lvl.icon}
-              </div>
-              <div className="text-center">
-                <span className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2 block">
-                  {lvl.level}
-                </span>
-                <TypewriterText
-                  text={lvl.title}
-                  className="text-xl font-bold text-foreground mb-3"
-                  as="h3"
-                  key={i} // Re-trigger animation on level change
-                />
-                <p className="text-sm text-neutral-400 leading-relaxed">
-                  {lvl.desc}
-                </p>
-              </div>
-            </NeonCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -499,7 +139,7 @@ const ContactForm = () => {
     } y quiero automatizar: ${formData.message}`;
     const whatsappUrl = `https://wa.me/5493541215803?text=${encodeURIComponent(
       message
-    )}`; // Reemplazar número real
+    )}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -508,9 +148,10 @@ const ContactForm = () => {
       id="contacto"
       className="py-24 bg-background relative overflow-hidden"
     >
+      <SonarBackground opacity={0.3} />
       {/* Glows */}
       <div className="absolute -left-20 top-20 w-96 h-96 bg-cyan-900/20 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute -right-20 bottom-20 w-96 h-96 bg-violet-900/20 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute -right-20 bottom-20 w-96 h-96 bg-cyan-900/20 rounded-full blur-[128px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
@@ -531,7 +172,7 @@ const ContactForm = () => {
             <div className="space-y-6">
               <div className="flex items-center gap-4 text-neutral-300">
                 <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-cyan-400">
-                  <Smartphone size={24} />
+                  <Zap size={24} />
                 </div>
                 <div>
                   <div className="text-sm text-neutral-500">
@@ -540,8 +181,9 @@ const ContactForm = () => {
                   <div className="font-semibold">+54 9 3541 21-5803</div>
                 </div>
               </div>
+
               <div className="flex items-center gap-4 text-neutral-300">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-violet-400">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-cyan-400">
                   <Globe size={24} />
                 </div>
                 <div>
@@ -627,7 +269,6 @@ const FounderSection = () => {
       id="nosotros"
       className="py-24 bg-transparent relative border-t border-white/5 overflow-hidden"
     >
-      {/* Sonar Background Effect - Reduced opacity for subtle blend */}
       <SonarBackground opacity={0.2} />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -643,24 +284,18 @@ const FounderSection = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <NeonCard
-            // FIX: Removed overflow-hidden to allow glow
-            className="bg-black/60 backdrop-blur-md rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 relative border border-white/10 shadow-2xl"
-          >
-            {/* Inner Clipper for Background Gradient */}
+          <NeonCard className="bg-black/60 backdrop-blur-md rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 relative border border-white/10 shadow-2xl">
             <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
               <div className="absolute top-0 right-0 w-75 h-75 bg-cyan-900/20 rounded-full blur-[100px] group-hover:bg-cyan-800/30 transition-colors" />
-              <div className="absolute bottom-0 left-0 w-50 h-50 bg-violet-900/10 rounded-full blur-[80px]" />
+              <div className="absolute bottom-0 left-0 w-50 h-50 bg-cyan-900/10 rounded-full blur-[80px]" />
             </div>
 
-            {/* Image Container */}
             <div className="relative shrink-0 z-10">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="w-48 h-48 rounded-full p-0.5 bg-linear-to-tr from-cyan-500 to-violet-500 shadow-2xl overflow-hidden relative z-10"
+                className="w-48 h-48 rounded-full p-0.5 bg-linear-to-tr from-cyan-500 to-cyan-300 shadow-2xl overflow-hidden relative z-10"
               >
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-background bg-muted flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/brian-photo.png"
                     onError={(
@@ -674,14 +309,13 @@ const FounderSection = () => {
                   />
                 </div>
               </motion.div>
-              <div className="absolute inset-0 rounded-full bg-linear-to-tr from-cyan-500 to-violet-500 blur-xl opacity-20 -z-10 group-hover:opacity-40 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-full bg-linear-to-tr from-cyan-500 to-cyan-300 blur-xl opacity-20 -z-10 group-hover:opacity-40 transition-opacity duration-500" />
             </div>
 
-            {/* Content */}
             <div className="flex-1 text-center md:text-left relative z-10">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-                  CEO & Founder
+                  Fundador & Arquitecto de Automatizaciones
                 </div>
                 <Linkedin className="w-5 h-5 text-blue-500 md:ml-auto opacity-0 md:opacity-100 group-hover:opacity-100 transition-opacity" />
               </div>
@@ -692,11 +326,10 @@ const FounderSection = () => {
               <div className="relative">
                 <Quote className="absolute -top-2 -left-4 w-6 h-6 text-white/10 transform -scale-x-100" />
                 <p className="text-neutral-400 leading-relaxed mb-6 italic relative z-10 pl-2">
-                  &quot;En VELION, no solo automatizamos tareas; liberamos el
-                  potencial humano. Mi visión es crear sistemas que trabajen
-                  incansablemente para que los emprendedores argentinos puedan
-                  enfocarse en lo que realmente importa: hacer crecer sus
-                  negocios.&quot;
+                  &quot;Cada negocio tiene procesos que roban tiempo y energía.
+                  Mi obsesión es eliminarlos. En VELION no vendemos tecnología,
+                  vendemos libertad: que puedas enfocarte en hacer crecer tu
+                  negocio mientras los sistemas trabajan solos.&quot;
                 </p>
               </div>
 
@@ -723,10 +356,8 @@ const FounderSection = () => {
   );
 };
 
-// --- COMPONENTES DE LA DEMO ---
-
 const InteractiveChatDemo = () => {
-  const [hasFinished, setHasFinished] = useState(false); // Nuevo estado
+  const [hasFinished, setHasFinished] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "ai",
@@ -748,12 +379,10 @@ const InteractiveChatDemo = () => {
 
     const userMsg = input;
     setInput("");
-    // Agregamos el mensaje del usuario a la lista visual
     setMessages((prev) => [...prev, { role: "user", text: userMsg }]);
     setLoading(true);
 
     try {
-      // --- CONEXIÓN CON TU N8N (VELION SERVER) ---
       const response = await fetch(
         "https://n8n.velion.com.ar/webhook/contacto",
         {
@@ -773,8 +402,7 @@ const InteractiveChatDemo = () => {
         const data = await response.json();
         const aiResponse = data.mensaje || "La IA no envió respuesta.";
         setMessages((prev) => [...prev, { role: "ai", text: aiResponse }]);
-
-        setHasFinished(true); // <--- AGREGA ESTA LÍNEA (Bloquea el chat)
+        setHasFinished(true);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -789,7 +417,6 @@ const InteractiveChatDemo = () => {
 
   return (
     <div className="w-full bg-[#0a0a0a] rounded-xl flex flex-col h-75 overflow-hidden border border-white/5 shadow-2xl shadow-cyan-900/10">
-      {/* Header del Chat */}
       <div className="p-3 border-b border-white/5 bg-neutral-900/50 flex items-center justify-between backdrop-blur-sm">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
@@ -802,7 +429,6 @@ const InteractiveChatDemo = () => {
         </span>
       </div>
 
-      {/* Área de Mensajes */}
       <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto p-4 space-y-3 font-sans text-xs scrollbar-thin scrollbar-thumb-neutral-800"
@@ -839,11 +465,8 @@ const InteractiveChatDemo = () => {
         )}
       </div>
 
-      {/* Input */}
-      {/* Input o Botón de Contacto según el estado */}
       <div className="p-3 bg-neutral-900/50 border-t border-white/5">
         {!hasFinished ? (
-          // MODO CHAT: Se puede escribir
           <div className="flex gap-2">
             <input
               type="text"
@@ -862,9 +485,8 @@ const InteractiveChatDemo = () => {
             </button>
           </div>
         ) : (
-          // MODO BLOQUEADO: Botón de WhatsApp
           <a
-            href="https://wa.me/5493541215803" // TU NUMERO AQUI
+            href="https://wa.me/5493541215803"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded-lg font-bold text-xs transition-all animate-pulse"
@@ -887,7 +509,6 @@ const InteractiveParserDemo = () => {
 
   const handleAnalyze = async () => {
     setLoading(true);
-    // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setJsonResult(
       "✅ Gasto registrado en Sistema Contable.\n✅ Comprobante PDF generado.\n✅ Notificación enviada a Contaduría."
@@ -896,11 +517,11 @@ const InteractiveParserDemo = () => {
   };
 
   return (
-    <div className="w-full bg-[#0a0a0a] rounded-xl p-4 font-sans relative overflow-hidden flex flex-col h-75 border border-white/5 shadow-2xl shadow-violet-900/10">
+    <div className="w-full bg-[#0a0a0a] rounded-xl p-4 font-sans relative overflow-hidden flex flex-col h-75 border border-white/5 shadow-2xl shadow-cyan-900/10">
       <div className="absolute top-0 left-0 w-full h-1 bg-neutral-800">
         {loading && (
           <motion.div
-            className="h-full bg-violet-500 shadow-[0_0_10px_#8b5cf6]"
+            className="h-full bg-cyan-500 shadow-[0_0_10px_#22d3ee]"
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -909,7 +530,7 @@ const InteractiveParserDemo = () => {
       </div>
 
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 shadow-lg shadow-violet-500/10">
+        <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shadow-lg shadow-cyan-500/10">
           <Code size={16} />
         </div>
         <div className="flex flex-col">
@@ -931,12 +552,12 @@ const InteractiveParserDemo = () => {
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="w-full bg-neutral-900/50 border border-white/10 rounded-lg p-3 text-xs text-neutral-300 focus:outline-none focus:border-violet-500/50 focus:bg-neutral-900 transition-all resize-none h-20"
+              className="w-full bg-neutral-900/50 border border-white/10 rounded-lg p-3 text-xs text-neutral-300 focus:outline-none focus:border-cyan-500/50 focus:bg-neutral-900 transition-all resize-none h-20"
             />
             <button
               onClick={handleAnalyze}
               disabled={loading}
-              className="absolute bottom-2 right-2 bg-violet-600 hover:bg-violet-500 text-white text-[10px] px-3 py-1.5 rounded-md transition-all shadow-lg shadow-violet-900/20 hover:shadow-violet-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute bottom-2 right-2 bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] px-3 py-1.5 rounded-md transition-all shadow-lg shadow-cyan-900/20 hover:shadow-cyan-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <Loader2 className="w-3 h-3 animate-spin" />
@@ -947,11 +568,11 @@ const InteractiveParserDemo = () => {
           </div>
         </div>
 
-        <div className="flex-1 bg-neutral-950 rounded-lg border border-white/5 p-3 overflow-hidden relative group hover:border-violet-500/20 transition-colors">
-          <div className="absolute top-2 right-2 text-[10px] text-neutral-600 group-hover:text-violet-400 transition-colors font-mono font-bold">
+        <div className="flex-1 bg-neutral-950 rounded-lg border border-white/5 p-3 overflow-hidden relative group hover:border-cyan-500/20 transition-colors">
+          <div className="absolute top-2 right-2 text-[10px] text-neutral-600 group-hover:text-cyan-400 transition-colors font-mono font-bold">
             RESULTADO
           </div>
-          <pre className="text-[10px] font-mono text-green-400 overflow-auto h-full p-1 scrollbar-thin scrollbar-thumb-neutral-800 whitespace-pre-wrap">
+          <pre className="text-[10px] font-mono text-cyan-400 overflow-auto h-full p-1 scrollbar-thin scrollbar-thumb-neutral-800 whitespace-pre-wrap">
             {jsonResult ? jsonResult : "// El resultado aparecerá aquí..."}
           </pre>
         </div>
@@ -969,7 +590,7 @@ const CalendarMockup = () => (
       <div className="flex gap-1.5">
         <div className="w-2 h-2 rounded-full bg-red-500/50" />
         <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-        <div className="w-2 h-2 rounded-full bg-green-500/50" />
+        <div className="w-2 h-2 rounded-full bg-cyan-500/50" />
       </div>
     </div>
     <div className="space-y-2 flex-1">
@@ -977,16 +598,14 @@ const CalendarMockup = () => (
         <span className="text-neutral-500 text-xs font-mono">09:00</span>
         <div className="h-1.5 w-20 bg-neutral-800 rounded-full" />
       </div>
-      <div className="flex gap-3 items-center p-2 rounded-lg bg-green-950/20 border border-green-500/20 border-l-2 border-l-green-500 relative overflow-hidden group">
-        <div className="absolute inset-0 bg-green-500/5 animate-pulse" />
-        <span className="text-green-400 text-xs font-mono font-bold">
-          10:30
-        </span>
+      <div className="flex gap-3 items-center p-2 rounded-lg bg-cyan-950/20 border border-cyan-500/20 border-l-2 border-l-cyan-500 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-cyan-500/5 animate-pulse" />
+        <span className="text-cyan-400 text-xs font-mono font-bold">10:30</span>
         <div className="flex flex-col gap-1 relative z-10">
           <span className="text-white text-xs font-medium">
             Turno Juan Pérez
           </span>
-          <span className="text-[10px] text-green-400/70 flex items-center gap-1">
+          <span className="text-[10px] text-cyan-400/70 flex items-center gap-1">
             <CheckCircle2 size={10} /> Confirmado por IA
           </span>
         </div>
@@ -1004,8 +623,6 @@ const CalendarMockup = () => (
     </div>
   </div>
 );
-
-// --- SECCIÓN PRINCIPAL: LIVE DEMO ---
 
 const LiveDemoSection = () => {
   return (
@@ -1030,12 +647,9 @@ const LiveDemoSection = () => {
             className="mb-6"
           />
           <p className="text-neutral-400 max-w-2xl mx-auto">
-            No es magia, es{" "}
-            <span className="text-cyan-400 font-bold">
-              Inteligencia Artificial
-            </span>
-            . Interactúe con las demos a continuación para ver el poder real de
-            la IA.
+            Automatizamos el trabajo repetitivo de tu empresa.{" "}
+            <span className="text-cyan-400">Todo.</span> Interactúe con las
+            demos a continuación para ver el poder real de la IA.
           </p>
         </div>
 
@@ -1068,15 +682,15 @@ const LiveDemoSection = () => {
           {/* Demo 2: Calendario */}
           <NeonCard
             delay={0.2}
-            className="group relative bg-card/90 border border-white/10 rounded-3xl p-6 hover:border-green-500/30 transition-all duration-500"
+            className="group relative bg-card/90 border border-white/10 rounded-3xl p-6 hover:border-cyan-500/30 transition-all duration-500"
           >
-            <div className="absolute inset-0 bg-linear-to-b from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+            <div className="absolute inset-0 bg-linear-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
             <div className="relative z-10">
               <div className="mb-6 transition-transform duration-300">
                 <CalendarMockup />
               </div>
               <div className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-green-500/10 text-green-400">
+                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
                   <Calendar size={20} />
                 </div>
                 <span className="font-serif italic tracking-tight">
@@ -1094,15 +708,15 @@ const LiveDemoSection = () => {
           {/* Demo 3: Parser Administrativo */}
           <NeonCard
             delay={0.4}
-            className="group relative bg-card/90 border border-white/10 rounded-3xl p-6 hover:border-violet-500/30 transition-all duration-500"
+            className="group relative bg-card/90 border border-white/10 rounded-3xl p-6 hover:border-cyan-500/30 transition-all duration-500"
           >
-            <div className="absolute inset-0 bg-linear-to-b from-violet-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+            <div className="absolute inset-0 bg-linear-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
             <div className="relative z-10">
               <div className="mb-6 transition-transform duration-300">
                 <InteractiveParserDemo />
               </div>
               <div className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-violet-500/10 text-violet-400">
+                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
                   <FileSpreadsheet size={20} />
                 </div>
                 <span className="font-serif italic tracking-tight">
@@ -1122,87 +736,31 @@ const LiveDemoSection = () => {
   );
 };
 
-const AdaptabilitySection = () => {
-  return (
-    <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
-            <ShieldCheck size={14} className="text-cyan-400" /> Tecnología
-            Invisible
-          </div>
-          <AnimatedTitle
-            title="Se adapta a las reglas"
-            highlight="de TU juego"
-            className="mb-6"
-          />
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Entrenamiento a Medida",
-              desc: "Entrenamos al agente con TU vocabulario y TUS políticas comerciales. No suena como un robot genérico.",
-              icon: <Bot size={32} className="text-cyan-400" />,
-              delay: 0,
-            },
-            {
-              title: "Integración Profunda",
-              desc: "Se conecta con TUS herramientas actuales (Excel, Calendar, ERPs) sin romper nada. Tu información viaja sola.",
-              icon: <Workflow size={32} className="text-violet-400" />,
-              delay: 0.2,
-            },
-            {
-              title: "Seguridad Blindada",
-              desc: "Seguridad total: Tus datos y los de tus clientes están protegidos con estándares bancarios.",
-              icon: <ShieldCheck size={32} className="text-green-400" />,
-              delay: 0.4,
-            },
-          ].map((item, i) => (
-            <NeonCard
-              key={i}
-              delay={item.delay}
-              className="relative bg-linear-to-b from-white/5 to-transparent border border-white/10 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition-all group p-8 rounded-2xl shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]"
-            >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10">
-                <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-cyan-500/20 group-hover:bg-cyan-500/10 transition-colors">
-                  {item.icon}
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors relative z-10">
-                {item.title}
-              </h3>
-              <p className="text-neutral-400 leading-relaxed relative z-10">
-                {item.desc}
-              </p>
-            </NeonCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// --- FAQ SECTION ---
 const FAQSection = () => {
   const faqs = [
     {
-      q: "¿Necesito saber de tecnología para usar esto?",
-      a: "Para nada. Nosotros configuramos todo. Tú solo recibes los reportes y ves cómo la agenda se llena sola. Es 100% llave en mano.",
+      q: "¿Solo hacen chatbots?",
+      a: "No. Los chatbots son solo una parte. Automatizamos cualquier proceso repetitivo: redes sociales, facturación, reportes, integraciones entre sistemas, y mucho más.",
     },
     {
-      q: "¿Hay riesgo de que bloqueen mi WhatsApp?",
-      a: "No. Utilizamos tecnología oficial verificada por WhatsApp y técnicas de 'Human-Like Timing' para garantizar la seguridad de tu línea.",
+      q: "¿Pueden automatizar mis redes sociales?",
+      a: "Sí. Programamos publicaciones, respondemos comentarios con IA, enviamos DMs automáticos, y generamos contenido. Tu marca activa 24/7 sin esfuerzo.",
     },
     {
-      q: "¿Sirve para mi rubro específico?",
-      a: "Nuestros agentes se entrenan a medida. Ya sea que tengas una clínica, una ferretería o un estudio jurídico, el sistema aprende tu vocabulario y reglas.",
+      q: "¿Trabajan con empresas grandes?",
+      a: "Sí. Tenemos planes desde emprendedores hasta empresas con procesos complejos. El Plan Enterprise incluye integración con ERPs, desarrollo a medida y equipo dedicado.",
     },
     {
-      q: "¿Qué incluye el Setup Inicial?",
-      a: "Incluye el diseño de la estrategia, la programación del agente, la conexión con tus sistemas (Calendar, Excel, etc.) y las pruebas intensivas antes de salir al público.",
+      q: "¿Qué pasa si necesito algo muy específico?",
+      a: "Lo analizamos juntos. Si el proceso se puede explicar y es repetitivo, probablemente lo podamos automatizar.",
+    },
+    {
+      q: "¿Cuánto tardo en ver resultados?",
+      a: "La mayoría de las automatizaciones básicas funcionan en 5-8 días. Proyectos complejos pueden tomar 2-4 semanas.",
+    },
+    {
+      q: "¿Puedo empezar con algo chico y después escalar?",
+      a: "¡Sí! De hecho lo recomendamos. Empezá con una automatización, vemos resultados, y después sumamos más.",
     },
   ];
 
@@ -1231,7 +789,7 @@ const FAQSection = () => {
               delay={i * 0.1}
               className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition-all group backdrop-blur-sm"
             >
-              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
                 {faq.q}
               </h3>
               <p className="text-neutral-400 text-sm leading-relaxed">
@@ -1244,8 +802,6 @@ const FAQSection = () => {
     </section>
   );
 };
-
-// --- MAIN PAGE COMPONENT ---
 
 export default function VELION_Landing() {
   const [isAccelerating, setIsAccelerating] = useState(false);
@@ -1274,6 +830,7 @@ export default function VELION_Landing() {
         showUI={false}
         className="fixed inset-0 z-0 pointer-events-none"
       />
+
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-transparent">
         {/* Spotlight Effect */}
@@ -1289,13 +846,13 @@ export default function VELION_Landing() {
             {/* Text Backdrop for readability - Stronger */}
             <div className="absolute -inset-10 bg-black/60 blur-3xl rounded-full -z-10 pointer-events-none" />
 
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-cyan-950/30 border border-cyan-500/20 w-fit mx-auto animate-fade-in-up">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span className="text-cyan-400 text-xs font-bold tracking-widest uppercase bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-md border border-cyan-500/30 shadow-lg shadow-black/50">
-                SISTEMA ONLINE
+              <span className="text-xs font-medium text-cyan-300 tracking-wide uppercase">
+                AGENCIA DE AUTOMATIZACIÓN CON IA
               </span>
             </div>
 
@@ -1305,19 +862,19 @@ export default function VELION_Landing() {
               transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
               className="text-5xl sm:text-6xl md:text-7xl font-sans font-medium tracking-tight mb-6 leading-[1.1] drop-shadow-xl text-shadow-sm"
             >
-              Tu negocio pierde oportunidades{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-violet-400">
-                mientras duermes.
-              </span>{" "}
-              Nosotros no.
+              Automatizamos el trabajo repetitivo de tu empresa.{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-cyan-200">
+                Todo.
+              </span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="text-lg text-white/90 leading-relaxed mb-10 max-w-xl mx-auto font-light drop-shadow-md bg-black/20 backdrop-blur-sm p-4 rounded-xl border border-white/5"
             >
-              Instalamos Agentes Inteligentes que atienden, venden y administran
-              tu empresa. Automatiza lo aburrido, escala lo importante.
+              Desde responder mensajes hasta generar reportes, publicar en redes
+              y facturar. Vos enfocate en crecer, nosotros nos encargamos de lo
+              aburrido.
             </motion.p>
 
             <motion.div
@@ -1326,54 +883,57 @@ export default function VELION_Landing() {
             >
               <Button
                 variant="shiny"
-                href="#demo"
+                href="#servicios"
                 className="shiny-cta shadow-2xl shadow-cyan-500/20"
               >
-                Ver a mi Nuevo Empleado Digital
+                Ver qué podemos automatizar
+              </Button>
+              <Button variant="shiny" href="#contacto" className="shiny-cta">
+                Agendar llamada
               </Button>
             </motion.div>
           </motion.div>
         </div>
       </section>
-      {/* --- INFINITE MARQUEE (Original) --- */}
+
+      {/* --- INFINITE MARQUEE --- */}
       <InfiniteMarquee />
-      {/* --- QUICK WINS SECTION --- */}
-      <QuickWinsSection />
-      {/* --- SECCIÓN 1: COMPARATIVA --- */}
-      <ComparisonSection />
-      {/* --- SECCIÓN 2: MÉTRICAS --- */}
+
+      {/* --- SERVICES SECTION --- */}
+      <ServicesSection />
+
+      {/* --- IS THIS FOR YOU SECTION --- */}
+      <IsThisForYouSection />
+
+      {/* --- METRICS SECTION --- */}
       <MetricsSection />
+
       {/* --- LIVE DEMO SECTION --- */}
       <LiveDemoSection />
-      {/* --- SECCIÓN 6: PRUEBA SOCIAL --- */}
+
+      {/* --- SOCIAL PROOF SECTION --- */}
       <SocialProofSection />
-      {/* --- SECCIÓN 3: VS (Empleado vs VELION) --- */}
+
+      {/* --- VS SECTION --- */}
       <VsSection />
-      {/* --- PRICING SECTION --- */}
-      <section id="precios" className="py-24 bg-background relative">
-        {/* --- TRUST BRIDGE SECTION --- */}
-        <div className="container mx-auto px-6 relative z-10 mb-24">
+
+      {/* --- POTENCIA A TU EQUIPO SECTION --- */}
+      <section className="py-24 bg-background relative overflow-hidden">
+        <SonarBackground opacity={0.3} />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center relative">
-            {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-32 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-900/10 text-violet-400 text-xs font-bold uppercase tracking-wider mb-6">
-                <HeartHandshake size={14} className="text-violet-400" />{" "}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6">
+                <HeartHandshake size={14} className="text-cyan-400" />{" "}
                 Potenciación Humana
               </div>
-              <motion.h2
-                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] }}
-                className="text-3xl md:text-5xl font-sans font-bold text-white mb-6 tracking-tight drop-shadow-xl text-shadow-sm"
-              >
-                Potencia a tu equipo,{" "}
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-violet-400">
-                  no lo reemplaces.
-                </span>
-              </motion.h2>
+              <AnimatedTitle
+                title="Potencia a tu equipo,"
+                highlight="no lo reemplaces."
+                className="mb-6"
+              />
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1389,10 +949,16 @@ export default function VELION_Landing() {
             </div>
           </div>
         </div>
+      </section>
 
+      {/* --- INDUSTRIES SECTION --- */}
+      <IndustriesSection />
+
+      {/* --- PRICING SECTION --- */}
+      <section id="precios" className="py-24 bg-background relative">
         <div
           suppressHydrationWarning
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-violet-900/10 rounded-full blur-[120px] pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none"
         />
 
         <div className="container mx-auto px-6 relative z-10">
@@ -1421,7 +987,7 @@ export default function VELION_Landing() {
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
               <div className="mb-8 relative z-10">
                 <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-                  Agente Comercial
+                  AGENTE COMERCIAL
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
                   Plan PyME
@@ -1434,7 +1000,7 @@ export default function VELION_Landing() {
                 </div>
 
                 <div className="mt-6 p-4 bg-cyan-950/30 border border-cyan-500/10 rounded-xl flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 shrink-0 border border-cyan-500/20">
+                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-4">
                     <Zap size={18} />
                   </div>
                   <div>
@@ -1450,10 +1016,11 @@ export default function VELION_Landing() {
 
               <div className="space-y-5 mb-10 flex-1 relative z-10">
                 {[
-                  "Recepción 24/7 (Filtra curiosos)",
-                  "Asistente de Ventas (Maneja objeciones)",
-                  "Secretaria Virtual (Agenda reuniones)",
-                  "Alerta de Ventas al Celular",
+                  "1 automatización principal (a elección)",
+                  "Atención 24/7 por WhatsApp o Instagram",
+                  "Agendamiento automático de turnos",
+                  "Alertas de ventas al celular",
+                  "Soporte incluido",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3 group">
                     <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
@@ -1477,25 +1044,25 @@ export default function VELION_Landing() {
             {/* PLAN ENTERPRISE - USD */}
             <NeonCard
               delay={0.2}
-              className="relative rounded-3xl p-8 border border-violet-500/20 bg-linear-to-b from-violet-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(139,92,246,0.05)]"
+              className="relative rounded-3xl p-8 border border-sky-500/30 bg-linear-to-b from-sky-900/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_30px_rgba(14,165,233,0.1)] hover:border-sky-400/50 transition-colors duration-500"
             >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-violet-500 to-transparent opacity-50" />
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-sky-500 to-transparent opacity-70" />
               <div className="mb-8">
-                <div className="inline-block px-3 py-1 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(139,92,246,0.2)]">
-                  Sistema Integral
+                <div className="inline-block px-3 py-1 bg-sky-500/10 border border-sky-500/20 rounded-full text-sky-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(14,165,233,0.25)]">
+                  SISTEMA INTEGRAL
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
                   Plan Enterprise
                 </h3>
                 <div className="flex flex-col mt-6">
-                  <span className="text-violet-200/60 text-sm font-medium mb-1">
+                  <span className="text-sky-200/60 text-sm font-medium mb-1">
                     Proyectos desde
                   </span>
-                  <span className="text-5xl font-bold text-white tracking-tighter">
+                  <span className="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]">
                     US$ 1,500
                   </span>
                 </div>
-                <p className="text-neutral-400 text-sm mt-6 leading-relaxed border-l-2 border-violet-500/30 pl-4">
+                <p className="text-neutral-400 text-sm mt-6 leading-relaxed border-l-2 border-sky-500/30 pl-4">
                   Automatización de procesos administrativos, contables y
                   logísticos complejos.
                 </p>
@@ -1503,27 +1070,29 @@ export default function VELION_Landing() {
 
               <div className="space-y-5 mb-10 flex-1 border-t border-white/5 pt-8">
                 {[
-                  "Administración y Contabilidad",
-                  "Logística y Control de Stock",
-                  "Legal y Burocracia Automática",
-                  "Analista de Negocio (Reportes)",
-                ].map((feature, i) => (
+                  { text: "Múltiples automatizaciones", emoji: "⚡" },
+                  { text: "Redes sociales automatizadas", emoji: "📲" },
+                  { text: "Administración y Contabilidad", emoji: "💼" },
+                  { text: "Logística y Control de Stock", emoji: "📦" },
+                  { text: "Integraciones con tus sistemas", emoji: "🔗" },
+                  { text: "Desarrollo a medida", emoji: "💎" },
+                ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3 group">
-                    <span className="text-lg grayscale group-hover:grayscale-0 transition-all duration-300">
-                      🚀
+                    <span className="text-lg grayscale group-hover:grayscale-0 transition-all duration-300 filter drop-shadow-[0_0_8px_rgba(14,165,233,0.5)]">
+                      {item.emoji}
                     </span>
                     <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
-                      {feature}
+                      {item.text}
                     </span>
                   </div>
                 ))}
               </div>
 
               <Button
-                variant="outline"
+                variant="shiny"
                 href="https://wa.me/5493541215803?text=Hola%20Brian,%20necesito%20una%20Auditor%C3%ADa%20de%20Procesos%20para%20mi%20empresa."
                 target="_blank"
-                className="w-full border-white/10 hover:bg-white/5"
+                className="w-full shiny-cta"
               >
                 Solicitar Auditoría de Procesos
               </Button>
@@ -1531,18 +1100,22 @@ export default function VELION_Landing() {
           </div>
         </div>
       </section>
-      {/* --- ADAPTABILITY SECTION --- */}
-      <AdaptabilitySection />
+
       {/* --- FAQ SECTION --- */}
       <FAQSection />
-      {/* --- SECCIÓN 4: TIMELINE --- */}
+
+      {/* --- TIMELINE SECTION --- */}
       <TimelineSection />
-      {/* --- SECCIÓN 5: GARANTÍA --- */}
+
+      {/* --- GARANTÍA SECTION --- */}
       <GuaranteeSection />
+
       {/* --- CONTACT FORM --- */}
       <ContactForm />
+
       {/* --- FOUNDER SECTION --- */}
       <FounderSection />
+
       {/* --- FOOTER --- */}
       <footer className="bg-black/50 backdrop-blur-xl border-t border-white/10 py-16">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -1555,13 +1128,13 @@ export default function VELION_Landing() {
 
           <div className="flex gap-6">
             <a
-              href="#"
+              href="/terminos"
               className="text-neutral-600 hover:text-cyan-400 text-xs transition-colors"
             >
               Términos y Condiciones
             </a>
             <a
-              href="#"
+              href="/privacidad"
               className="text-neutral-600 hover:text-cyan-400 text-xs transition-colors"
             >
               Política de Privacidad
@@ -1569,7 +1142,8 @@ export default function VELION_Landing() {
           </div>
 
           <div className="text-neutral-600 text-xs font-mono">
-            &copy; 2025 VELION AI Agency. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} VELION AI Agency. Todos los
+            derechos reservados.
           </div>
         </div>
       </footer>

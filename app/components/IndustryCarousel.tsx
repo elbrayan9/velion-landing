@@ -27,9 +27,9 @@ const INDUSTRIES = [
     title: "Asistente Médico Virtual",
     description:
       "Confirma turnos automáticamente para reducir el ausentismo, responde dudas pre-operatorias frecuentes y gestiona la reprogramación de citas las 24hs.",
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-    border: "border-emerald-500/20",
+    color: "text-cyan-400",
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/20",
   },
   {
     id: 2,

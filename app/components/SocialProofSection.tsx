@@ -2,53 +2,46 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, BrainCircuit, Server, ArrowRight } from "lucide-react";
+import { ArrowRight, Wrench, Target, HeartHandshake } from "lucide-react";
+import { Button } from "./Button";
+import SonarBackground from "./SonarBackground";
 
 export const SocialProofSection = () => {
-  const metrics = [
+  const cards = [
     {
-      value: "+500",
-      label: "Conversaciones de prueba",
-      desc: "Nuestro agente demo ha atendido más de 500 consultas sin intervención humana.",
-      icon: MessageCircle,
+      title: "Tecnología de punta",
+      desc: "Usamos las mismas herramientas que empresas como Google, Meta y OpenAI.",
+      icon: Wrench,
     },
     {
-      value: "+2 años",
-      label: "Desarrollando con IA",
-      desc: "Experiencia construyendo sistemas de automatización con inteligencia artificial.",
-      icon: BrainCircuit,
+      title: "Enfoque en resultados",
+      desc: "No cobramos por hacer, cobramos por resolver. Si no funciona, lo arreglamos.",
+      icon: Target,
     },
     {
-      value: "99.9%",
-      label: "Uptime garantizado",
-      desc: "Infraestructura en la nube con redundancia y monitoreo 24/7.",
-      icon: Server,
+      title: "Soporte real",
+      desc: "Nada de tickets eternos. Hablás directo con el equipo que armó tu automatización.",
+      icon: HeartHandshake,
     },
   ];
 
   return (
-    <section className="py-24 bg-black border-t border-white/10 relative z-10">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-black border-t border-white/10 relative z-10 overflow-hidden">
+      <SonarBackground opacity={0.3} />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {metrics.map((metric, i) => (
+          {cards.map((card, i) => (
             <div
               key={i}
-              className="bg-zinc-900/50 p-8 rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-colors"
+              className="bg-zinc-900/50 p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 transition-colors"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-zinc-900 rounded-lg text-emerald-400">
-                  <metric.icon size={24} />
+                <div className="p-3 bg-zinc-900 rounded-lg text-cyan-400">
+                  <card.icon size={24} />
                 </div>
-                <div>
-                  <h3 className="text-3xl font-bold text-white">
-                    {metric.value}
-                  </h3>
-                  <p className="text-zinc-400 text-sm font-medium">
-                    {metric.label}
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-white">{card.title}</h3>
               </div>
-              <p className="text-zinc-500 leading-relaxed">{metric.desc}</p>
+              <p className="text-zinc-400 leading-relaxed">{card.desc}</p>
             </div>
           ))}
         </div>
@@ -63,17 +56,17 @@ export const SocialProofSection = () => {
             ¿Todavía con dudas?
           </h3>
           <p className="text-zinc-400 max-w-2xl mx-auto mb-8 text-lg">
-            Te hacemos una demo personalizada gratis para tu negocio. Vemos tu
-            caso, te mostramos cómo funcionaría, sin compromiso.
+            Te mostramos cómo funcionaría en TU negocio. Sin compromiso.
           </p>
-          <a
+          <Button
+            variant="shiny"
             href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20una%20demo%20personalizada%20gratis"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-bold text-lg transition-all shadow-lg shadow-emerald-900/20 hover:scale-105"
+            className="shiny-cta"
           >
-            Quiero mi Demo Gratis <ArrowRight size={20} />
-          </a>
+            Agendar demo gratis <ArrowRight size={20} />
+          </Button>
         </motion.div>
       </div>
     </section>
