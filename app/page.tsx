@@ -1113,6 +1113,9 @@ export default function VELION_Landing() {
                   Plan Enterprise
                 </h3>
                 <div className="flex flex-col mt-6">
+                  <span className="text-sky-200/80 text-base font-medium mb-1 tracking-wide">
+                    Desde
+                  </span>
                   <span className="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]">
                     $1.500 USD
                   </span>
