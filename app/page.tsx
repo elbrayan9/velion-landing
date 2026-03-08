@@ -138,7 +138,7 @@ const ContactForm = () => {
       formData.company || "varios rubros"
     } y quiero automatizar: ${formData.message}`;
     const whatsappUrl = `https://wa.me/5493541215803?text=${encodeURIComponent(
-      message
+      message,
     )}`;
     window.open(whatsappUrl, "_blank");
   };
@@ -299,7 +299,7 @@ const FounderSection = () => {
                   <img
                     src="/brian-photo.png"
                     onError={(
-                      e: React.SyntheticEvent<HTMLImageElement, Event>
+                      e: React.SyntheticEvent<HTMLImageElement, Event>,
                     ) => {
                       e.currentTarget.src =
                         "https://ui-avatars.com/api/?name=Brian+Oviedo&background=0D8ABC&color=fff&size=200";
@@ -395,7 +395,7 @@ const InteractiveChatDemo = () => {
             type: "chat_message",
             timestamp: new Date().toISOString(),
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -502,7 +502,7 @@ const InteractiveChatDemo = () => {
 
 const InteractiveParserDemo = () => {
   const [input, setInput] = useState(
-    "Registrar pago de $20.000 a Proveedor Juan por insumos de limpieza."
+    "Registrar pago de $20.000 a Proveedor Juan por insumos de limpieza.",
   );
   const [jsonResult, setJsonResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -511,7 +511,7 @@ const InteractiveParserDemo = () => {
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setJsonResult(
-      "✅ Gasto registrado en Sistema Contable.\n✅ Comprobante PDF generado.\n✅ Notificación enviada a Contaduría."
+      "✅ Gasto registrado en Sistema Contable.\n✅ Comprobante PDF generado.\n✅ Notificación enviada a Contaduría.",
     );
     setLoading(false);
   };
@@ -981,9 +981,69 @@ export default function VELION_Landing() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
+            {/* PLAN STARTER */}
+            <NeonCard className="relative rounded-3xl p-8 border border-white/10 bg-linear-to-b from-neutral-800/20 to-transparent backdrop-blur-xl flex flex-col hover:border-white/20 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)] transition-colors duration-500">
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-white/20 to-transparent opacity-50" />
+              <div className="mb-8 relative z-10">
+                <div className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/80 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(255,255,255,0.05)]">
+                  INICIAL
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                  Plan Starter
+                </h3>
+                <div className="flex items-baseline gap-1 mt-6">
+                  <span className="text-5xl font-bold text-white tracking-tighter">
+                    $45.000
+                  </span>
+                  <span className="text-white/50 font-medium">/mes</span>
+                </div>
+
+                <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-xl flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4">
+                    <Zap size={18} className="text-white/70" />
+                  </div>
+                  <div>
+                    <span className="text-white/90 font-semibold block text-sm">
+                      Setup Inicial: $150.000 ARS
+                    </span>
+                    <span className="text-white/50 text-xs">
+                      Pago Único de Instalación
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-5 mb-10 flex-1 relative z-10">
+                {[
+                  "Bot WhatsApp básico",
+                  "Respuestas automáticas",
+                  "Soporte por email",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-start gap-3 group">
+                    <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                    <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                variant="shiny"
+                href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20contratar%20el%20Plan%20Starter."
+                target="_blank"
+                className="w-full relative z-10 shiny-cta"
+              >
+                Elegir Plan
+              </Button>
+            </NeonCard>
+
             {/* PLAN PYME - ARS */}
-            <NeonCard className="relative rounded-3xl p-8 border border-cyan-500/20 bg-linear-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05)]">
+            <NeonCard
+              delay={0.1}
+              className="relative rounded-3xl p-8 border border-cyan-500/20 bg-linear-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05)] hover:border-cyan-500/30 transition-colors duration-500"
+            >
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
               <div className="mb-8 relative z-10">
                 <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
@@ -994,9 +1054,9 @@ export default function VELION_Landing() {
                 </h3>
                 <div className="flex items-baseline gap-1 mt-6">
                   <span className="text-5xl font-bold text-white tracking-tighter">
-                    $85.000
+                    $120.000
                   </span>
-                  <span className="text-cyan-200/60 font-medium">ARS /mes</span>
+                  <span className="text-cyan-200/60 font-medium">/mes</span>
                 </div>
 
                 <div className="mt-6 p-4 bg-cyan-950/30 border border-cyan-500/10 rounded-xl flex items-center gap-4">
@@ -1005,7 +1065,7 @@ export default function VELION_Landing() {
                   </div>
                   <div>
                     <span className="text-cyan-100 font-semibold block text-sm">
-                      Setup Inicial: $190.000 ARS
+                      Setup Inicial: $350.000 ARS
                     </span>
                     <span className="text-cyan-400/60 text-xs">
                       Pago Único de Instalación
@@ -1016,11 +1076,9 @@ export default function VELION_Landing() {
 
               <div className="space-y-5 mb-10 flex-1 relative z-10">
                 {[
-                  "1 automatización principal (a elección)",
-                  "Atención 24/7 por WhatsApp o Instagram",
-                  "Agendamiento automático de turnos",
-                  "Alertas de ventas al celular",
-                  "Soporte incluido",
+                  "Bot IA + Audio + Memoria",
+                  "Atención 24/7 humanizada",
+                  "Soporte prioritario",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3 group">
                     <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
@@ -1055,27 +1113,20 @@ export default function VELION_Landing() {
                   Plan Enterprise
                 </h3>
                 <div className="flex flex-col mt-6">
-                  <span className="text-sky-200/60 text-sm font-medium mb-1">
-                    Proyectos desde
-                  </span>
                   <span className="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]">
-                    US$ 1,500
+                    $1.500 USD
+                  </span>
+                  <span className="text-sky-200/60 text-sm font-medium mt-1">
+                    Mantenimiento: $100.000 ARS /mes
                   </span>
                 </div>
-                <p className="text-neutral-400 text-sm mt-6 leading-relaxed border-l-2 border-sky-500/30 pl-4">
-                  Automatización de procesos administrativos, contables y
-                  logísticos complejos.
-                </p>
               </div>
 
               <div className="space-y-5 mb-10 flex-1 border-t border-white/5 pt-8">
                 {[
                   { text: "Múltiples automatizaciones", emoji: "⚡" },
-                  { text: "Redes sociales automatizadas", emoji: "📲" },
-                  { text: "Administración y Contabilidad", emoji: "💼" },
-                  { text: "Logística y Control de Stock", emoji: "📦" },
-                  { text: "Integraciones con tus sistemas", emoji: "🔗" },
-                  { text: "Desarrollo a medida", emoji: "💎" },
+                  { text: "Web + Logística + Stock", emoji: "📦" },
+                  { text: "Soporte dedicado", emoji: "💎" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3 group">
                     <span className="text-lg grayscale group-hover:grayscale-0 transition-all duration-300 filter drop-shadow-[0_0_8px_rgba(14,165,233,0.5)]">
@@ -1094,7 +1145,7 @@ export default function VELION_Landing() {
                 target="_blank"
                 className="w-full shiny-cta"
               >
-                Solicitar Auditoría de Procesos
+                Solicitar Auditoría
               </Button>
             </NeonCard>
           </div>
