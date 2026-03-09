@@ -998,6 +998,10 @@ export default function VELION_Landing() {
                   </span>
                   <span className="text-white/50 font-medium">/mes</span>
                 </div>
+                <p className="text-white/40 text-xs mt-2 font-medium">
+                  Sin contratos.{" "}
+                  <span className="text-white/60">Cancelá cuando quieras.</span>
+                </p>
 
                 <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-xl flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4">
@@ -1067,6 +1071,12 @@ export default function VELION_Landing() {
                   </span>
                   <span className="text-cyan-200/60 font-medium">/mes</span>
                 </div>
+                <p className="text-cyan-200/40 text-xs mt-2 font-medium">
+                  Sin contratos.{" "}
+                  <span className="text-cyan-200/70">
+                    Cancelá cuando quieras.
+                  </span>
+                </p>
 
                 <div className="mt-6 p-4 bg-cyan-950/30 border border-cyan-500/10 rounded-xl flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-4">
@@ -1134,6 +1144,12 @@ export default function VELION_Landing() {
                     Mantenimiento: $100.000 ARS /mes
                   </span>
                 </div>
+                <p className="text-sky-200/40 text-xs mt-2 font-medium">
+                  Resultados medibles.{" "}
+                  <span className="text-sky-200/70">
+                    Escalabilidad garantizada.
+                  </span>
+                </p>
               </div>
 
               <div className="space-y-5 mb-10 flex-1 border-t border-white/5 pt-8">
