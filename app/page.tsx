@@ -1046,8 +1046,17 @@ export default function VELION_Landing() {
             >
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
               <div className="mb-8 relative z-10">
-                <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-                  AGENTE COMERCIAL
+                <div className="flex items-center justify-between mb-4">
+                  <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                    AGENTE COMERCIAL
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-linear-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 rounded-full text-amber-400 text-[10px] font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.2)] animate-pulse">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                    </span>
+                    MÁS ELEGIDO
+                  </div>
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
                   Plan PyME
@@ -1078,6 +1087,8 @@ export default function VELION_Landing() {
                 {[
                   "Bot IA + Audio + Memoria",
                   "Atención 24/7 humanizada",
+                  "Transcripción de audios con IA",
+                  "Memoria de conversación",
                   "Soporte prioritario",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-3 group">
@@ -1144,11 +1155,11 @@ export default function VELION_Landing() {
 
               <Button
                 variant="shiny"
-                href="https://wa.me/5493541215803?text=Hola%20Brian,%20necesito%20una%20Auditor%C3%ADa%20de%20Procesos%20para%20mi%20empresa."
+                href="https://wa.me/5493541215803?text=Hola%20Brian,%20me%20gustaría%20agendar%20una%20Demo%20para%20el%20Plan%20Enterprise."
                 target="_blank"
                 className="w-full shiny-cta"
               >
-                Solicitar Auditoría
+                Agendar Demo
               </Button>
             </NeonCard>
           </div>
