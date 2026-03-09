@@ -29,7 +29,7 @@ export const TimelineSection = () => {
     {
       day: "Día 8+",
       title: "En vivo",
-      desc: "Activamos todo y te capacitamos. Soporte incluido.",
+      desc: "Activamos todo, te capacitamos y monitoreamos los primeros 7 días.",
       icon: Rocket,
     },
   ];
