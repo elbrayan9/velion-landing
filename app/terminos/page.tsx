@@ -55,20 +55,20 @@ export default function TerminosPage() {
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
               <span className="text-cyan-500">3.</span> Planes y Precios
             </h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800">
                 <h3 className="text-xl font-bold text-white mb-2">
-                  3.1 Plan PyME
+                  3.1 Plan Starter
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li>
                     <span className="text-zinc-500">Costo mensual:</span>{" "}
-                    <span className="text-cyan-400 font-mono">$85.000 ARS</span>
+                    <span className="text-cyan-400 font-mono">$45.000 ARS</span>
                   </li>
                   <li>
                     <span className="text-zinc-500">Setup inicial:</span>{" "}
                     <span className="text-cyan-400 font-mono">
-                      $190.000 ARS
+                      $150.000 ARS
                     </span>{" "}
                     (pago único)
                   </li>
@@ -76,12 +76,40 @@ export default function TerminosPage() {
               </div>
               <div className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800">
                 <h3 className="text-xl font-bold text-white mb-2">
-                  3.2 Plan Enterprise
+                  3.2 Plan PyME
+                </h3>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <span className="text-zinc-500">Costo mensual:</span>{" "}
+                    <span className="text-cyan-400 font-mono">
+                      $120.000 ARS
+                    </span>
+                  </li>
+                  <li>
+                    <span className="text-zinc-500">Setup inicial:</span>{" "}
+                    <span className="text-cyan-400 font-mono">
+                      $350.000 ARS
+                    </span>{" "}
+                    (pago único)
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800">
+                <h3 className="text-xl font-bold text-white mb-2">
+                  3.3 Plan Enterprise
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li>
                     <span className="text-zinc-500">Proyectos desde:</span>{" "}
                     <span className="text-cyan-400 font-mono">USD 1.500</span>
+                  </li>
+                  <li>
+                    <span className="text-zinc-500">
+                      Mantenimiento mensual:
+                    </span>{" "}
+                    <span className="text-cyan-400 font-mono">
+                      $100.000 ARS
+                    </span>
                   </li>
                   <li>Cotización personalizada según requerimientos</li>
                 </ul>
@@ -229,10 +257,16 @@ export default function TerminosPage() {
                 </h3>
                 <ul className="list-disc list-inside space-y-2 ml-4 text-zinc-300">
                   <li>
+                    <strong>
+                      Sin contratos a largo plazo ni permanencia mínima
+                      obligatoria.
+                    </strong>
+                  </li>
+                  <li>
                     Podés cancelar en cualquier momento con 15 días de
                     anticipación.
                   </li>
-                  <li>No hay reembolso del mes en curso.</li>
+                  <li>No hay reembolso del mes en curso ni prorrateos.</li>
                   <li>
                     El setup inicial no es reembolsable después de los primeros
                     30 días.
