@@ -140,12 +140,14 @@ export default function TerminosPage() {
             </h2>
             <div className="bg-cyan-950/20 border border-cyan-500/20 p-6 rounded-xl">
               <p className="mb-4 font-medium text-cyan-100">
-                Ofrecemos una <strong>garantía de 30 días</strong>:
+                Ofrecemos una <strong>Garantía de Compromiso</strong> de 30 días:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 text-zinc-300">
                 <li>
-                  Si en los primeros 30 días no ves mejoras en tu atención al
-                  cliente, te devolvemos el 100% del setup inicial.
+                  El pago del Setup Inicial <strong>no es reembolsable</strong> bajo ninguna circunstancia, ya que cubre los costos de infraestructura, servidores y desarrollo.
+                </li>
+                <li>
+                  Sin embargo, si en los primeros 30 días no ves mejoras en tu atención al cliente, <strong>bonificaremos el 100% del costo de mantenimiento mensual</strong> y trabajaremos en optimizaciones gratis hasta lograr los resultados pautados.
                 </li>
                 <li>
                   Esta garantía no aplica si el cliente no proporciona la
@@ -268,8 +270,7 @@ export default function TerminosPage() {
                   </li>
                   <li>No hay reembolso del mes en curso ni prorrateos.</li>
                   <li>
-                    El setup inicial no es reembolsable después de los primeros
-                    30 días.
+                    El pago del setup inicial <strong>no es reembolsable</strong> en ningún caso.
                   </li>
                 </ul>
               </div>

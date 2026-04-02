@@ -25,14 +25,15 @@ export const GuaranteeSection = () => {
                 <ShieldCheck size={32} />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Garantía de Resultados
+                Garantía de Compromiso
               </h2>
               <p className="text-xl text-zinc-300 max-w-2xl mb-6">
-                Si en 30 días no ves mejoras en tu atención al cliente, te
-                devolvemos el 100% del setup.
+                El valor del Setup no es reembolsable. Pero si en 30 días no ves
+                mejoras en tu atención, te bonificamos el 100% del mantenimiento
+                mensual y trabajamos gratis hasta lograrlo.
               </p>
               <p className="text-cyan-400/80 font-medium text-sm uppercase tracking-wider">
-                Sin letra chica. Sin preguntas. Si no funciona, no pagás.
+                Compartimos el riesgo. Si el sistema no rinde, no pagás la mensualidad.
               </p>
             </div>
           </div>
