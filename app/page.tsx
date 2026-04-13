@@ -386,7 +386,7 @@ const InteractiveChatDemo = () => {
 
     try {
       const response = await fetch(
-        "https://n8n.velion.com.ar/webhook/contacto",
+        "https://paneln8n.velion-ai.cloud/webhook/contacto",
         {
           method: "POST",
           headers: {
@@ -961,7 +961,10 @@ export default function VELION_Landing() {
       <IndustriesSection />
 
       {/* --- PRICING SECTION --- */}
-      <section id="precios" className="py-24 bg-background relative overflow-hidden">
+      <section
+        id="precios"
+        className="py-24 bg-background relative overflow-hidden"
+      >
         <div
           suppressHydrationWarning
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none"
@@ -988,7 +991,6 @@ export default function VELION_Landing() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
-
             {/* ══════════════════════════════════════════════
                 PLAN 1: STARTER (Inicial)
                ══════════════════════════════════════════════ */}
@@ -1007,7 +1009,9 @@ export default function VELION_Landing() {
                   </span>
                   <span className="text-white/50 font-medium">USD/mes</span>
                 </div>
-                <span className="text-white/40 text-xs font-medium mt-1 block uppercase tracking-wider">Mantenimiento mensual</span>
+                <span className="text-white/40 text-xs font-medium mt-1 block uppercase tracking-wider">
+                  Mantenimiento mensual
+                </span>
                 <p className="text-white/40 text-xs mt-2 font-medium">
                   Sin contratos.{" "}
                   <span className="text-white/60">Cancelá cuando quieras.</span>
@@ -1112,7 +1116,9 @@ export default function VELION_Landing() {
                   </span>
                   <span className="text-cyan-200/60 font-medium">USD/mes</span>
                 </div>
-                <span className="text-cyan-200/40 text-xs font-medium mt-1 block uppercase tracking-wider">Mantenimiento mensual</span>
+                <span className="text-cyan-200/40 text-xs font-medium mt-1 block uppercase tracking-wider">
+                  Mantenimiento mensual
+                </span>
                 <p className="text-cyan-200/40 text-xs mt-2 font-medium">
                   Sin contratos.{" "}
                   <span className="text-cyan-200/70">
@@ -1224,7 +1230,9 @@ export default function VELION_Landing() {
                     </span>
                     <span className="text-sky-200/60 font-medium">USD/mes</span>
                   </div>
-                  <span className="text-sky-200/40 text-xs font-medium mt-1 block uppercase tracking-wider">Mantenimiento mensual</span>
+                  <span className="text-sky-200/40 text-xs font-medium mt-1 block uppercase tracking-wider">
+                    Mantenimiento mensual
+                  </span>
                   <span className="text-sky-200/60 text-sm font-medium mt-2">
                     Cotización final según la complejidad de tu operación
                   </span>
@@ -1324,7 +1332,10 @@ export default function VELION_Landing() {
             transition={{ delay: 0.4 }}
             className="text-center text-white/30 text-xs max-w-3xl mx-auto mt-12 leading-relaxed border-t border-white/5 pt-8"
           >
-            Todos los precios están expresados en dólares estadounidenses (USD). Aceptamos pagos en pesos argentinos al tipo de cambio del día. El setup es un pago único que cubre diseño, desarrollo, testing y puesta en marcha de tu sistema.
+            Todos los precios están expresados en dólares estadounidenses (USD).
+            Aceptamos pagos en pesos argentinos al tipo de cambio del día. El
+            setup es un pago único que cubre diseño, desarrollo, testing y
+            puesta en marcha de tu sistema.
           </motion.p>
         </div>
       </section>
@@ -1369,7 +1380,7 @@ export default function VELION_Landing() {
             </a>
           </div>
 
-          <div className="text-neutral-600 text-xs font-mono">
+          <div className="text-neutral-600 text-xs font-mono" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} VELION AI Agency. Todos los
             derechos reservados.
           </div>

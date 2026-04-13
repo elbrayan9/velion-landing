@@ -81,7 +81,7 @@ export default function InfiniteMarquee() {
         ))}
       </div>
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes marquee {
           0% {
             transform: translateX(0);
@@ -93,7 +93,7 @@ export default function InfiniteMarquee() {
         .animate-marquee {
           animation: marquee 40s linear infinite;
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }
