@@ -358,6 +358,8 @@ const FounderSection = () => {
 
 const InteractiveChatDemo = () => {
   const [hasFinished, setHasFinished] = useState(false);
+  const [userMsgCount, setUserMsgCount] = useState(0);
+  const MAX_MESSAGES = 4;
   const [messages, setMessages] = useState([
     {
       role: "ai",
@@ -402,7 +404,11 @@ const InteractiveChatDemo = () => {
         const data = await response.json();
         const aiResponse = data.mensaje || "La IA no envió respuesta.";
         setMessages((prev) => [...prev, { role: "ai", text: aiResponse }]);
-        setHasFinished(true);
+        const newCount = userMsgCount + 1;
+        setUserMsgCount(newCount);
+        if (newCount >= MAX_MESSAGES) {
+          setHasFinished(true);
+        }
       }
     } catch (error) {
       console.error("Error:", error);
