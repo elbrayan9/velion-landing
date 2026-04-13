@@ -10,7 +10,7 @@ export default function TerminosPage() {
           </h1>
           <p className="text-cyan-400 font-medium">VELION AI Agency</p>
           <p className="text-zinc-500 text-sm mt-2">
-            Última actualización: Enero 2025
+            Última actualización: Abril 2026
           </p>
         </header>
 
@@ -63,14 +63,18 @@ export default function TerminosPage() {
                 <ul className="space-y-2 text-sm">
                   <li>
                     <span className="text-zinc-500">Costo mensual:</span>{" "}
-                    <span className="text-cyan-400 font-mono">$45.000 ARS</span>
+                    <span className="text-cyan-400 font-mono">$49 USD</span>
                   </li>
                   <li>
                     <span className="text-zinc-500">Setup inicial:</span>{" "}
                     <span className="text-cyan-400 font-mono">
-                      $150.000 ARS
+                      $99 USD
                     </span>{" "}
                     (pago único)
+                  </li>
+                  <li>
+                    <span className="text-zinc-500">Conversaciones:</span>{" "}
+                    Hasta 500/mes
                   </li>
                 </ul>
               </div>
@@ -82,15 +86,19 @@ export default function TerminosPage() {
                   <li>
                     <span className="text-zinc-500">Costo mensual:</span>{" "}
                     <span className="text-cyan-400 font-mono">
-                      $120.000 ARS
+                      $119 USD
                     </span>
                   </li>
                   <li>
                     <span className="text-zinc-500">Setup inicial:</span>{" "}
                     <span className="text-cyan-400 font-mono">
-                      $350.000 ARS
+                      $299 USD
                     </span>{" "}
                     (pago único)
+                  </li>
+                  <li>
+                    <span className="text-zinc-500">Conversaciones:</span>{" "}
+                    Hasta 2.000/mes
                   </li>
                 </ul>
               </div>
@@ -100,23 +108,23 @@ export default function TerminosPage() {
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <span className="text-zinc-500">Proyectos desde:</span>{" "}
-                    <span className="text-cyan-400 font-mono">USD 1.500</span>
+                    <span className="text-zinc-500">Costo mensual:</span>{" "}
+                    <span className="text-cyan-400 font-mono">Desde $499 USD</span>
                   </li>
                   <li>
-                    <span className="text-zinc-500">
-                      Mantenimiento mensual:
-                    </span>{" "}
+                    <span className="text-zinc-500">Setup inicial:</span>{" "}
                     <span className="text-cyan-400 font-mono">
-                      $100.000 ARS
-                    </span>
+                      Desde $999 USD
+                    </span>{" "}
+                    (pago único)
                   </li>
-                  <li>Cotización personalizada según requerimientos</li>
+                  <li>Cotización final según la complejidad de tu operación</li>
+                  <li>Conversaciones y automatizaciones ilimitadas</li>
                 </ul>
               </div>
             </div>
             <p className="mt-4 text-sm text-zinc-500 italic">
-              Los precios pueden actualizarse con previo aviso de 30 días.
+              Todos los precios están expresados en dólares estadounidenses (USD). Aceptamos pagos en pesos argentinos al tipo de cambio del día. Los precios pueden actualizarse con previo aviso de 30 días.
             </p>
           </section>
 
@@ -126,7 +134,8 @@ export default function TerminosPage() {
             </h2>
             <ul className="list-disc list-inside space-y-2 ml-4 text-zinc-300">
               <li>Los pagos se realizan por adelantado, de forma mensual.</li>
-              <li>Métodos aceptados: Transferencia bancaria, Mercado Pago.</li>
+              <li>Métodos aceptados: Transferencia bancaria, Mercado Pago, transferencia en USD.</li>
+              <li>Aceptamos pagos en pesos argentinos al tipo de cambio del día.</li>
               <li>El servicio se activa una vez confirmado el pago.</li>
               <li>
                 El setup inicial se abona antes de comenzar el desarrollo.

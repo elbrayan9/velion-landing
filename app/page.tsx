@@ -955,7 +955,7 @@ export default function VELION_Landing() {
       <IndustriesSection />
 
       {/* --- PRICING SECTION --- */}
-      <section id="precios" className="py-24 bg-background relative">
+      <section id="precios" className="py-24 bg-background relative overflow-hidden">
         <div
           suppressHydrationWarning
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none"
@@ -976,13 +976,16 @@ export default function VELION_Landing() {
                 transition={{ delay: 0.2 }}
                 className="text-white/60 max-w-2xl mx-auto text-lg"
               >
-                Dos caminos para escalar. Elige tu velocidad.
+                Tres planes para escalar tu negocio. Todos los precios en USD.
               </motion.p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
-            {/* PLAN STARTER */}
+
+            {/* ══════════════════════════════════════════════
+                PLAN 1: STARTER (Inicial)
+               ══════════════════════════════════════════════ */}
             <NeonCard className="relative rounded-3xl p-8 border border-white/10 bg-linear-to-b from-neutral-800/20 to-transparent backdrop-blur-xl flex flex-col hover:border-white/20 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)] transition-colors duration-500">
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-white/20 to-transparent opacity-50" />
               <div className="mb-8 relative z-10">
@@ -994,43 +997,73 @@ export default function VELION_Landing() {
                 </h3>
                 <div className="flex items-baseline gap-1 mt-6">
                   <span className="text-5xl font-bold text-white tracking-tighter">
-                    $45.000
+                    $49
                   </span>
-                  <span className="text-white/50 font-medium">/mes</span>
+                  <span className="text-white/50 font-medium">USD/mes</span>
                 </div>
+                <span className="text-white/40 text-xs font-medium mt-1 block uppercase tracking-wider">Mantenimiento mensual</span>
                 <p className="text-white/40 text-xs mt-2 font-medium">
                   Sin contratos.{" "}
                   <span className="text-white/60">Cancelá cuando quieras.</span>
                 </p>
 
                 <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-xl flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
                     <Zap size={18} className="text-white/70" />
                   </div>
                   <div>
                     <span className="text-white/90 font-semibold block text-sm">
-                      Setup Inicial: $150.000 ARS
+                      Setup: $99 USD
                     </span>
                     <span className="text-white/50 text-xs">
-                      Pago Único de Instalación
+                      Pago único · Diseño, desarrollo y puesta en marcha
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-5 mb-10 flex-1 relative z-10">
-                {[
-                  "Bot WhatsApp básico",
-                  "Respuestas automáticas",
-                  "Soporte por email",
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3 group">
-                    <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
-                    <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
+              {/* Features */}
+              <div className="space-y-4 mb-10 flex-1 relative z-10">
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Bot WhatsApp con IA básica
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    Hasta 500 conversaciones/mes
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Respuestas automáticas inteligentes
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    1 flujo de automatización
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-white/5 my-2" />
+
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Soporte por email (48hs hábiles)
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5 group-hover:text-white/80 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Panel de métricas básico
+                  </span>
+                </div>
               </div>
 
               <Button
@@ -1039,16 +1072,18 @@ export default function VELION_Landing() {
                 target="_blank"
                 className="w-full relative z-10 shiny-cta"
               >
-                Elegir Plan
+                Empezar Ahora
               </Button>
             </NeonCard>
 
-            {/* PLAN PYME - ARS */}
+            {/* ══════════════════════════════════════════════
+                PLAN 2: PyME (Agente Comercial) — MÁS ELEGIDO ⭐
+               ══════════════════════════════════════════════ */}
             <NeonCard
               delay={0.1}
-              className="relative rounded-3xl p-8 border border-cyan-500/20 bg-linear-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05)] hover:border-cyan-500/30 transition-colors duration-500"
+              className="relative rounded-3xl p-8 border-2 border-cyan-500/30 bg-linear-to-b from-cyan-950/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_20px_rgba(6,182,212,0.05),0_0_40px_rgba(6,182,212,0.08)] hover:border-cyan-500/50 transition-colors duration-500 md:scale-105 md:-my-4"
             >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-80" />
               <div className="mb-8 relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <div className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(6,182,212,0.2)]">
@@ -1059,7 +1094,7 @@ export default function VELION_Landing() {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
                     </span>
-                    MÁS ELEGIDO
+                    ⭐ MÁS ELEGIDO
                   </div>
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
@@ -1067,10 +1102,11 @@ export default function VELION_Landing() {
                 </h3>
                 <div className="flex items-baseline gap-1 mt-6">
                   <span className="text-5xl font-bold text-white tracking-tighter">
-                    $120.000
+                    $119
                   </span>
-                  <span className="text-cyan-200/60 font-medium">/mes</span>
+                  <span className="text-cyan-200/60 font-medium">USD/mes</span>
                 </div>
+                <span className="text-cyan-200/40 text-xs font-medium mt-1 block uppercase tracking-wider">Mantenimiento mensual</span>
                 <p className="text-cyan-200/40 text-xs mt-2 font-medium">
                   Sin contratos.{" "}
                   <span className="text-cyan-200/70">
@@ -1079,35 +1115,72 @@ export default function VELION_Landing() {
                 </p>
 
                 <div className="mt-6 p-4 bg-cyan-950/30 border border-cyan-500/10 rounded-xl flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-4">
-                    <Zap size={18} />
+                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center shrink-0">
+                    <Zap size={18} className="text-cyan-400" />
                   </div>
                   <div>
                     <span className="text-cyan-100 font-semibold block text-sm">
-                      Setup Inicial: $350.000 ARS
+                      Setup: $299 USD
                     </span>
                     <span className="text-cyan-400/60 text-xs">
-                      Pago Único de Instalación
+                      Pago único · Diseño, desarrollo y puesta en marcha
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-5 mb-10 flex-1 relative z-10">
-                {[
-                  "Bot IA + Audio + Memoria",
-                  "Atención 24/7 humanizada",
-                  "Transcripción de audios con IA",
-                  "Memoria de conversación",
-                  "Soporte prioritario",
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3 group">
-                    <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
-                    <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
+              {/* Features */}
+              <div className="space-y-4 mb-10 flex-1 relative z-10">
+                <p className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-2">
+                  Todo lo del plan Starter +
+                </p>
+
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    Bot IA con audio, memoria y contexto
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    Hasta 2.000 conversaciones/mes
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Transcripción automática de audios
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Atención humanizada 24/7
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    Hasta 3 flujos de automatización
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-cyan-500/10 my-2" />
+
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Soporte prioritario por WhatsApp (mismo día)
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5 group-hover:text-cyan-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Reportes semanales automáticos
+                  </span>
+                </div>
               </div>
 
               <Button
@@ -1120,7 +1193,9 @@ export default function VELION_Landing() {
               </Button>
             </NeonCard>
 
-            {/* PLAN ENTERPRISE - USD */}
+            {/* ══════════════════════════════════════════════
+                PLAN 3: ENTERPRISE (Sistema Integral)
+               ══════════════════════════════════════════════ */}
             <NeonCard
               delay={0.2}
               className="relative rounded-3xl p-8 border border-sky-500/30 bg-linear-to-b from-sky-900/20 to-transparent backdrop-blur-xl flex flex-col shadow-[inset_0_0_30px_rgba(14,165,233,0.1)] hover:border-sky-400/50 transition-colors duration-500"
@@ -1134,51 +1209,117 @@ export default function VELION_Landing() {
                   Plan Enterprise
                 </h3>
                 <div className="flex flex-col mt-6">
-                  <span className="text-sky-200/80 text-base font-medium mb-1 tracking-wide">
+                  <span className="text-sky-200/80 text-sm font-medium mb-1 tracking-wide">
                     Desde
                   </span>
-                  <span className="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]">
-                    $1.500 USD
-                  </span>
-                  <span className="text-sky-200/60 text-sm font-medium mt-1">
-                    Mantenimiento: $100.000 ARS /mes
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]">
+                      $499
+                    </span>
+                    <span className="text-sky-200/60 font-medium">USD/mes</span>
+                  </div>
+                  <span className="text-sky-200/40 text-xs font-medium mt-1 block uppercase tracking-wider">Mantenimiento mensual</span>
+                  <span className="text-sky-200/60 text-sm font-medium mt-2">
+                    Cotización final según la complejidad de tu operación
                   </span>
                 </div>
-                <p className="text-sky-200/40 text-xs mt-2 font-medium">
-                  Resultados medibles.{" "}
-                  <span className="text-sky-200/70">
-                    Escalabilidad garantizada.
-                  </span>
-                </p>
-              </div>
 
-              <div className="space-y-5 mb-10 flex-1 border-t border-white/5 pt-8">
-                {[
-                  { text: "Múltiples automatizaciones", emoji: "⚡" },
-                  { text: "Web + Logística + Stock", emoji: "📦" },
-                  { text: "Soporte dedicado", emoji: "💎" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 group">
-                    <span className="text-lg grayscale group-hover:grayscale-0 transition-all duration-300 filter drop-shadow-[0_0_8px_rgba(14,165,233,0.5)]">
-                      {item.emoji}
+                <div className="mt-6 p-4 bg-sky-950/30 border border-sky-500/10 rounded-xl flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center shrink-0">
+                    <Zap size={18} className="text-sky-400" />
+                  </div>
+                  <div>
+                    <span className="text-sky-100 font-semibold block text-sm">
+                      Setup: Desde $999 USD
                     </span>
-                    <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
-                      {item.text}
+                    <span className="text-sky-400/60 text-xs">
+                      Pago único · Según complejidad del proyecto
                     </span>
                   </div>
-                ))}
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-4 mb-10 flex-1 border-t border-white/5 pt-6">
+                <p className="text-sky-400 text-xs font-bold uppercase tracking-wider mb-2">
+                  Todo lo del plan PyME +
+                </p>
+
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    Conversaciones ilimitadas
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors font-bold">
+                    Automatizaciones ilimitadas
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Integración con ERP / CRM / sistemas propios
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Desarrollo de flujos a medida
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-sky-500/10 my-2" />
+
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Soporte dedicado con canal directo
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    SLA de respuesta garantizado
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Onboarding y capacitación del equipo
+                  </span>
+                </div>
+                <div className="flex items-start gap-3 group">
+                  <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 group-hover:text-sky-400 transition-colors" />
+                  <span className="text-neutral-300 text-sm group-hover:text-white transition-colors">
+                    Revisiones mensuales de rendimiento
+                  </span>
+                </div>
               </div>
 
               <Button
                 variant="shiny"
-                href="https://wa.me/5493541215803?text=Hola%20Brian,%20me%20gustaría%20agendar%20una%20Demo%20para%20el%20Plan%20Enterprise."
+                href="https://wa.me/5493541215803?text=Hola%20Brian,%20quiero%20agendar%20una%20Reunión%20Estratégica%20para%20el%20Plan%20Enterprise."
                 target="_blank"
                 className="w-full shiny-cta"
               >
-                Agendar Demo
+                Agendar Reunión Estratégica
               </Button>
             </NeonCard>
           </div>
+
+          {/* Footnote - Aclaración USD / ARS */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center text-white/30 text-xs max-w-3xl mx-auto mt-12 leading-relaxed border-t border-white/5 pt-8"
+          >
+            Todos los precios están expresados en dólares estadounidenses (USD). Aceptamos pagos en pesos argentinos al tipo de cambio del día. El setup es un pago único que cubre diseño, desarrollo, testing y puesta en marcha de tu sistema.
+          </motion.p>
         </div>
       </section>
 
